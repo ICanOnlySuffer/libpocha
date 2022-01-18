@@ -1,9 +1,12 @@
-# include <stdio.h>
-# pragma once
+# ifndef _PUTILS_INPUT_
+# define _PUTILS_INPUT_
 
-void input (char * string, char * buffer, unsigned short size) {
-	unsigned short i = 0;
-	char c = ' ';
+# include <stdio.h>
+# include "types.h"
+
+nil input (str string, str buffer, ux4 size) {
+	ux4 i = 0;
+	ix1 c = ' ';
 	
 	printf (string);
 	
@@ -17,7 +20,7 @@ void input (char * string, char * buffer, unsigned short size) {
 	buffer [i - 1] = 0;
 }
 
-
+# endif // _PUTILS_INPUT_
 
 
 
