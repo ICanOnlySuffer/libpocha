@@ -1,9 +1,8 @@
-# ifndef _TYPES_
-# define _TYPES_
+# ifndef _PUTILS_TYPES_
+# define _PUTILS_TYPES_
 
 # include <stdbool.h>
 # include <stdint.h>
-# define con const
 # define NIL NULL
 # define and &&
 # define not !
@@ -24,5 +23,5 @@ typedef uint64_t ux8;
 
 typedef int8_t *str;
 
-# endif
+# endif // _PUTILS_TYPES_
 
