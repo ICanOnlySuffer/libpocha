@@ -1,27 +1,36 @@
 # ifndef _PUTILS_TYPES_
 # define _PUTILS_TYPES_
 
-# include <stdbool.h>
 # include <stdint.h>
+
+// values
+
 # define NIL NULL
+# define false 0
+# define true 1
+
+// operators
+
 # define and &&
 # define not !
 # define or ||
 
-typedef bool tof;
+// typedefs
+
 typedef void nil;
 
-typedef int8_t  ix1;
-typedef int16_t ix2;
-typedef int32_t ix4;
-typedef int64_t ix8;
+typedef int8_t  s08;
+typedef int16_t s16;
+typedef int32_t s32;
+typedef int64_t s64;
 
-typedef uint8_t  ux1;
-typedef uint16_t ux2;
-typedef uint32_t ux4;
-typedef uint64_t ux8;
+typedef uint8_t  u08;
+typedef uint16_t u16;
+typedef uint32_t u32;
+typedef uint64_t u64;
 
-typedef int8_t *str;
+typedef char chr;
+typedef char *str;
 
 # endif // _PUTILS_TYPES_
 
