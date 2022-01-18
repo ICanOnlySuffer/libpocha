@@ -1,5 +1,5 @@
-# ifndef _VECTOR_
-# define _VECTOR_
+# ifndef _PUTILS_VECTOR_
+# define _PUTILS_VECTOR_
 
 # include <stdlib.h>
 # include "types.h"
@@ -97,7 +97,7 @@ nil vector_free (struct vector *vector) {
 # define vector_sort(vector_, compare_) \
 	qsort (vector_->items, vector_->size, sizeof (nil*), compare_)
 
-# endif
+# endif // _PUTILS_VECTOR_
 
 
 
