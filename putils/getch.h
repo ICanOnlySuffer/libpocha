@@ -41,7 +41,7 @@ ix1 getch () {
 	return c;
 }
 
-# endif // putils/getch.h
+# endif // _PUTILS_GETCH_
 
 
 
