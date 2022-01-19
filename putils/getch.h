@@ -1,5 +1,5 @@
 # ifndef _PUTILS_GETCH_
-# define _PUTILS_GETCH_
+# define _PUTILS_GETCH_ 1
 
 # include <termios.h>
 # include <unistd.h>
@@ -8,9 +8,9 @@
 
 // XXX SOURCE: https://stackoverflow.com/a/42220830 XXX //
 
-ix1 getch () {
+chr getch () {
 	struct termios old = {0};
-	ix1 c = 0;
+	chr c = 0;
 	
 	fflush (stdout);
 	

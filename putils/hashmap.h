@@ -1,7 +1,7 @@
 # ifndef _HASHMAP_
-# define _HASHMAP_
+# define _HASHMAP_ 1
 
-# include "pstring.h"
+# include "string.h"
 # include "vector.h"
 
 struct hash {
@@ -9,10 +9,11 @@ struct hash {
 	str value;
 };
 
-str hashmap_get (struct vector *hashmap, str key) {
-	for (ux2 i = 0; i < hashmap->size; i++) {
-		if (streql (((struct hash *) (hashmap->items [i]))->key, key)) {
-			key = ((struct hash *) (hashmap->items [i]))->value;
+str hashmap_get (vec *hashmap, str key) {
+	for (u16 i = 0; i < hashmap -> size; i++) {
+		struct hash *hash = hashmap -> items [i];
+		if (streql (hash -> key, key)) {
+			key = hash -> value;
 			break;
 		}
 	}

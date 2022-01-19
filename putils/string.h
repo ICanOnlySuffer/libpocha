@@ -1,13 +1,13 @@
 # ifndef _PUTILS_STRING_
-# define _PUTILS_STRING_
+# define _PUTILS_STRING_ 1
 
 # include <string.h>
 # include "types.h"
 
-str pstrcpy_ (str string, ux2 max, ux2 n_strings, str strings []) {
+str pstrcpy_ (str string, u16 max, u16 n_strings, str strings []) {
 	str start = string;
 	
-	for (ux2 i = 0, size = 1; i < n_strings; i++, string--) {
+	for (u16 i = 0, size = 1; i < n_strings; i++, string--) {
 		for (; size < max && (*string++ = *strings [i]++); size++);
 	}
 	
@@ -15,13 +15,13 @@ str pstrcpy_ (str string, ux2 max, ux2 n_strings, str strings []) {
 	return start;
 }
 
-str pstrcat_ (str string, ux2 max, ux2 n_strings, str strings []) {
+str pstrcat_ (str string, u16 max, u16 n_strings, str strings []) {
 	str end = string;
-	ux2 size = 1;
+	u16 size = 1;
 	
 	for (; *end && size < max; size++, end++);
 	
-	for (ux2 i = 0; i < n_strings; i++, end--) {
+	for (u16 i = 0; i < n_strings; i++, end--) {
 		for (; size < max && (*end++ = *strings [i]++); size++);
 	}
 	

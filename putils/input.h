@@ -1,16 +1,16 @@
 # ifndef _PUTILS_INPUT_
-# define _PUTILS_INPUT_
+# define _PUTILS_INPUT_ 1
 
 # include <stdio.h>
 # include "types.h"
 
-nil input (str string, str buffer, ux4 size) {
-	ux4 i = 0;
-	ix1 c = ' ';
+nil input (str string, str buffer, u32 size) {
+	u32 i = 0;
+	chr c = ' ';
 	
 	printf (string);
 	
-	while (c != '\n' && c != EOF) {
+	while (c != '\n' and c != EOF) {
 		c = fgetc (stdin);
 		if (i < size) {
 			buffer [i++] = c;

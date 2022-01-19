@@ -1,11 +1,11 @@
 # ifndef _PUTILS_STDIO_
-# define _PUTILS_STDIO_
+# define _PUTILS_STDIO_ 1
 
 # include <stdio.h>
 # include "types.h"
 
-nil pprint_ (ux2 size, str strings []) {
-	for (ux2 i = 0; i < size; i++) {
+nil pprint_ (u16 size, str strings []) {
+	for (u16 i = 0; i < size; i++) {
 		while (*strings [i]) {
 			putchar (*strings [i]++);
 		}
