@@ -1,5 +1,5 @@
 # include "../putils/vector.h"
-# include "test.h"
+# include "tester.h"
 
 chr main () {
 	it ("should append strings");
