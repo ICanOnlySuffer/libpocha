@@ -15,5 +15,5 @@ C utils library of headers for the average project.
 ## Licence
 
 This project is available as open source under terms of the
-[MIT Licence](https://opensource.org/licences/MIT).
+[MIT Licence](https://opensource.org/licenses/MIT).
 
