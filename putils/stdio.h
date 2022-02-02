@@ -1,5 +1,5 @@
 # ifndef _PUTILS_STDIO_
-# define _PUTILS_STDIO_ 2
+# define _PUTILS_STDIO_
 
 # include <stdio.h>
 # include "types.h"

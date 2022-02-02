@@ -1,7 +1,6 @@
 # ifndef _PUTILS_TYPES_
-# define _PUTILS_TYPES_ 1
+# define _PUTILS_TYPES_
 
-# include "version.h"
 # include <stdint.h>
 
 // values

@@ -1,5 +1,5 @@
 # ifndef _PUTILS_STRING_
-# define _PUTILS_STRING_ 1
+# define _PUTILS_STRING_
 
 # include <string.h>
 # include "types.h"
@@ -27,7 +27,6 @@ str pstrcat_ (str string, u16 max, u16 n_strings, str strings []) {
 	
 	return string;
 }
-
 
 # define streql(string_1_, string_2_) \
 	(not strcmp (string_1_, string_2_))

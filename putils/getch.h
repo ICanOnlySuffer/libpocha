@@ -1,5 +1,5 @@
 # ifndef _PUTILS_GETCH_
-# define _PUTILS_GETCH_ 1
+# define _PUTILS_GETCH_
 
 # include <termios.h>
 # include <unistd.h>

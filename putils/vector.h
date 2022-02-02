@@ -1,5 +1,5 @@
 # ifndef _PUTILS_VECTOR_
-# define _PUTILS_VECTOR_ 1
+# define _PUTILS_VECTOR_
 
 # include <stdlib.h>
 # include "types.h"

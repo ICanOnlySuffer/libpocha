@@ -1,5 +1,5 @@
-# ifndef _HASHMAP_
-# define _HASHMAP_ 2
+# ifndef _PUTILS_HASHMAP_
+# define _PUTILS_HASHMAP_
 
 # include "string.h"
 # include "vector.h"
