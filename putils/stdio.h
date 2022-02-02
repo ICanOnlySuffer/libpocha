@@ -11,7 +11,7 @@ nil print_ (u16 size, str strings []) {
 }
 
 # define print(...)                                     \
-	pprint_ (                                           \
+	print_ (                                            \
 		sizeof ((str []) {__VA_ARGS__}) / sizeof (str), \
 		(str []) {__VA_ARGS__}                          \
 	)
