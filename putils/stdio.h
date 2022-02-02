@@ -1,31 +1,20 @@
 # ifndef _PUTILS_STDIO_
-# define _PUTILS_STDIO_ 1
+# define _PUTILS_STDIO_ 2
 
 # include <stdio.h>
 # include "types.h"
 
-nil pprint_ (u16 size, str strings []) {
+nil print_ (u16 size, str strings []) {
 	for (u16 i = 0; i < size; i++) {
-		while (*strings [i]) {
-			putchar (*strings [i]++);
-		}
+		printf (strings [i]);
 	}
 }
 
-# define pprint(...)                                    \
+# define print(...)                                     \
 	pprint_ (                                           \
 		sizeof ((str []) {__VA_ARGS__}) / sizeof (str), \
 		(str []) {__VA_ARGS__}                          \
 	)
 
-# define pputs(...) \
-	pprint (__VA_ARGS__, "\n")
-
 # endif // _PUTILS_STDIO_
-
-
-
-
-
-
 

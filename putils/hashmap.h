@@ -18,9 +18,9 @@ struct hash * hash_new (str key, str value) {
 	return hash;
 }
 
-str hashmap_get (vec *hashmap, str key) {
+str hashmap_get (vec * hashmap, str key) {
 	for (u16 i = 0; i < hashmap -> size; i++) {
-		struct hash *hash = hashmap -> items [i];
+		struct hash * hash = hashmap -> items [i];
 		if (streql (hash -> key, key)) {
 			key = hash -> value;
 			break;
@@ -30,20 +30,5 @@ str hashmap_get (vec *hashmap, str key) {
 	return key;
 }
 
-# endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# endif // _PUTILS_HASHMAP_
 

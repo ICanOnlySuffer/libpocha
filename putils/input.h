@@ -22,5 +22,3 @@ nil input (str string, str buffer, u32 size) {
 
 # endif // _PUTILS_INPUT_
 
-
-

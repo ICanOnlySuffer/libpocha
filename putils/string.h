@@ -8,7 +8,7 @@ str pstrcpy_ (str string, u16 max, u16 n_strings, str strings []) {
 	str start = string;
 	
 	for (u16 i = 0, size = 1; i < n_strings; i++, string--) {
-		for (; size < max && (*string++ = *strings [i]++); size++);
+		for (; size < max and (*string++ = *strings [i]++); size++);
 	}
 	
 	*++string = 0;
@@ -19,10 +19,10 @@ str pstrcat_ (str string, u16 max, u16 n_strings, str strings []) {
 	str end = string;
 	u16 size = 1;
 	
-	for (; *end && size < max; size++, end++);
+	for (; *end and size < max; size++, end++);
 	
 	for (u16 i = 0; i < n_strings; i++, end--) {
-		for (; size < max && (*end++ = *strings [i]++); size++);
+		for (; size < max and (*end++ = *strings [i]++); size++);
 	}
 	
 	return string;
@@ -49,11 +49,4 @@ str pstrcat_ (str string, u16 max, u16 n_strings, str strings []) {
 	)
 
 # endif // _PUTILS_STRING_
-
-
-
-
-
-
-
 

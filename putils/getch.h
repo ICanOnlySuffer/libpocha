@@ -43,9 +43,3 @@ chr getch () {
 
 # endif // _PUTILS_GETCH_
 
-
-
-
-
-
-
