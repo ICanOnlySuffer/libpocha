@@ -5,10 +5,6 @@ chr main () {
 	it ("should append strings");
 	
 	str names [] = {
-		"Paco",
-		"Paca",
-		"Pablo",
-		"Pabla",
 		"Juanito",
 		"Juanita",
 		"Cecilio",
@@ -17,15 +13,12 @@ chr main () {
 		"Victoria"
 	};
 	u08 n_names = sizeof (names) / sizeof (*names);
-	vec *names_vector = vector_new (2);
+	vec * names_vector = vector_new (4);
 	
 	for (u08 i = 0; i < n_names; i++) {
 		vector_append (names_vector, &(names [i]));
-		str *last = vector_last (names_vector);
-		
-		assert (
-			last == &names [i],
-			"\"%s\" == \"%s\"", *last, names [i]
+		assert_string_eql (
+			*(str *) vector_last (names_vector), names [i]
 		);
 	}
 }
