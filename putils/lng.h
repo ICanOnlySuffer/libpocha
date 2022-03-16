@@ -10,8 +10,8 @@
 # define PATH_SIZE 1024
 # endif
 
-extern str lng_get (vec * lang_directory, str key);
-extern vec * lng_load (str path, str rescue, u16 size);
+ext str lng_get (vec * lang_directory, str key);
+ext vec * lng_lod (str path, u16 size);
 
 # endif // _PUTILS_LNG_
 
