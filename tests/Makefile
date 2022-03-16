@@ -3,7 +3,7 @@ PUTILS = $(foreach obj, ioe str put vec dic lng, ../putils/$(obj).o)
 TESTER = tester.o
 OBJECTS = $(PUTILS) $(TESTER)
 
-TESTS = vector.bin str-cpy.bin # dictionary.bin
+TESTS = lang.bin vector.bin dictionary.bin
 
 CBIN = $(CC) $(OBJECTS) -O3
 
@@ -15,11 +15,11 @@ $(PUTILS):
 $(TESTER):
 	$(CC) tester.c -c
 
+lang.bin:
+	$(CBIN) lang.c -o lang.bin
+
 vector.bin:
 	$(CBIN) vector.c -o vector.bin
-
-str-cpy.bin:
-	$(CBIN) str-cpy.c -o str-cpy.bin
 
 dictionary.bin:
 	$(CBIN) dictionary.c -o dictionary.bin

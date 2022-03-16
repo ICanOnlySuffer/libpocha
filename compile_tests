@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-
-for file in ./tests/*.c
-do
-	command="gcc $file -o ${file%.*}.bin"
-	echo $command
-	$command
-done
-
