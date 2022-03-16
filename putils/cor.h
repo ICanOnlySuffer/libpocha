@@ -1,6 +1,8 @@
-# ifndef _PUTILS_TYPES_
-# define _PUTILS_TYPES_
 
+# ifndef PUTILS_COR_H
+# define PUTILS_COR_H
+
+# include <stddef.h>
 # include <stdint.h>
 
 // values
@@ -15,7 +17,14 @@
 # define not !
 # define or ||
 
+// logic
+
+# define unless(stuff) if (not (stuff))
+# define elif else if
+
 // typedefs
+
+# define con const
 
 typedef void nil;
 
@@ -33,7 +42,12 @@ typedef float flt;
 typedef double dbl;
 
 typedef char chr;
-typedef char *str;
+typedef char * str;
 
-# endif // _PUTILS_TYPES_
+// etc
+
+# define ARR_LEN(array_) \
+	sizeof (array_) / sizeof (*array_)
+
+# endif // PUTILS_COR_H
 
