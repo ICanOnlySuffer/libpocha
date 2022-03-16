@@ -19,14 +19,21 @@
 
 // logic
 
-# define unless(stuff) if (not (stuff))
-# define elif else if
+# define iff(stuff_) if (stuff_)
+# define unl(stuff_) if (not (stuff_))
+# define whl(stuff_) while (stuff_)
+# define utl(stuff_) while (not (stuff_))
+# define elf(stuff_) else if (stuff_)
+# define els else
+# define cse(stuff_) switch (stuff_)
+# define whn case
 
 // typedefs
 
 # define con const
 
 typedef void nil;
+typedef void * ptr;
 
 typedef int8_t  s08;
 typedef int16_t s16;
@@ -46,6 +53,8 @@ typedef char * str;
 
 // etc
 
+# define ret return
+# define ext extern
 # define ARR_LEN(array_) \
 	sizeof (array_) / sizeof (*array_)
 

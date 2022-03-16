@@ -8,10 +8,9 @@
 # define STD_OUT 1
 # define STD_ERR 2
 
-extern nil get_str (str buffer, u64 length);
-
-extern nil put_str (u64 file, str buffer, u64 length);
-extern nil put_chr (chr character);
+ext nil get_str (str buffer, u64 length);
+ext nil put_str (str buffer, u64 length);
+ext nil put_chr (chr character);
 
 # endif // _PUTILS_IOE_
 
