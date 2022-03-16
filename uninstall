@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-rm -rf /usr/include/putils
-
