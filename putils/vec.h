@@ -20,10 +20,10 @@ extern nil vec_psh_arr (vec * vector, nil * items [], u16 size);
 extern nil vec_rmv (vec * vector, u16 index);
 extern nil vec_clr (vec * vector);
 
-# define VEC_SORT(vector_, compare_) \
+# define VEC_SRT(vector_, compare_) \
 	qsort (vector_ -> items, vector_ -> size, sizeof (nil *), compare_)
 
-# define VEC_LAST(vector_) \
+# define VEC_LST(vector_) \
 	vector_ -> items [vector_ -> size - 1]
 
 # define VEC_FRE(vector_) \
