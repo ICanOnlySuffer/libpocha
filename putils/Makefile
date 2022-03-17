@@ -1,18 +1,15 @@
 
-OBJECTS = ioe.o str.o put.o vec.o dic.o lng.o
+OBJECTS = str.o put.o vec.o dic.o lng.o
 
 AC = nasm -f elf64
 
 all: $(OBJECTS)
 
-ioe.o:
-	$(AC) ioe.asm
-
 str.o:
 	$(AC) str.asm
 
 put.o:
-	$(CC) put.c -c
+	$(AC) put.asm
 
 vec.o:
 	$(CC) vec.c -c
