@@ -19,23 +19,23 @@ fil_put_chr:			  ; fil_put_chr u64:fil u08:chr dos
 	pop rsi				  ; 	__1  =  STK.pop
 	ret					  ; 	ret
 
-fil_put_arr:			  ; fil_put_arr u64:fil u16:len u64:arr dos
-	mov rcx, rdi		  ; 	__3  =  fil
-	mov r8w, si			  ; 	__4  =  len
-	mov r9, rdx			  ; 	__5  =  arr
-	fil_put_arr_loop:	  ; 	dos
-		mov rdi, [r9]	  ; 		__0  =  __5.val
-		cll str_len		  ; 		out  =  str_len.cll __0
-		mov rdx, rax	  ; 		__2  =  out
-		mov rsi, [r9]	  ; 		__1  =  __5.val
-		mov rdi, rcx	  ; 		__0  =  __3
-		mov rax, SYS_WRT  ; 		out  =  SYS_WRT
-		syscall			  ; 		sys_cll SYS_WRT __0 __1 __2
-		add r9, 8		  ; 		__5.inc
-		dec r8w			  ; 		__4.dec
-		cmp r8w, 0		  ; 		cmp __4 0
-		jne fil_put_arr_loop	  ; 		until __4 equ 0
-	ret					  ; 	ret
+fil_put_arr:				  ; fil_put_arr u64:fil u16:len u64:arr dos
+	mov r8, rdi				  ; 	__4  =  fil
+	mov r9w, si				  ; 	__5  =  len
+	mov r10, rdx			  ; 	__6  =  arr
+	fil_put_arr_loop:		  ; 	dos
+		mov rdi, [r10]		  ; 		__0  =  __6.val
+		cll str_len			  ; 		out  =  str_len.cll __0
+		mov rdx, rax		  ; 		__2  =  out
+		mov rsi, [r10]		  ; 		__1  =  __6.val
+		mov rdi, r8			  ; 		__0  =  __4
+		mov rax, SYS_WRT	  ; 		out  =  SYS_WRT
+		syscall				  ; 		sys_cll SYS_WRT __0 __1 __2
+		add r10, 8			  ; 		__6.inc
+		dec r9w				  ; 		__5.dec
+		cmp r9w, 0			  ; 		cmp __5 0
+		jne fil_put_arr_loop  ; 		until __5 equ 0
+	ret						  ; 	ret
 
 section .text			  ; sec txt
 	extern str_len		  ; 	ext str_len u64:str
