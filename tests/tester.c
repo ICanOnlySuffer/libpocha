@@ -37,8 +37,10 @@ u08 eql_str (ptr str_1, ptr str_2) {
 }
 
 nil assert (u08 (* fun) (ptr, ptr), ptr val_1, ptr val_2) {
-	put (tester_check [fun (val_1, val_2)]);
-	put (tester_buffers [0]);
-	put ("\e[0m\n");
+	PUT_ARR (
+		tester_check [fun (val_1, val_2)],
+		tester_buffers [0],
+		"\e[0m\n"
+	);
 }
 

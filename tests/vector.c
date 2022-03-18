@@ -16,7 +16,7 @@ chr main () {
 	
 	for (u08 i = 0; i < n_names; i++) {
 		vec_psh (names_vector, &(names [i]));
-		assert (eql_str, VEC_LAST (names_vector), &(names [i]));
+		assert (eql_str, VEC_LST (names_vector), &(names [i]));
 	}
 }
 

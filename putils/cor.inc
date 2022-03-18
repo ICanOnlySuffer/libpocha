@@ -53,7 +53,7 @@ SYS_QUT equ 60		  ; con SUS_QUT 60
 ; registers
 ; 64bit | 32bit | 16bit | 8hbit | 8lbit | keep | description
 ; rax   | eax   | ax    | ah    | al    | no   | returned
-; rcx   | ecx   | cx    | ch    | cl    | no   | parameter #4
+; rcx   | ecx   | cx    | ch    | cl    | no   | parameter #4 (cmp out)
 ; rdx   | edx   | dx    | dh    | dl    | no   | parameter #3
 ; rbx   | ebx   | bx    | bh    | bl    | yes  | -
 ; rsp   | esp   | sp    | n/a   | spl   | yes  | stack pointer
