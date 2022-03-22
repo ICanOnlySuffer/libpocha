@@ -55,26 +55,23 @@ str_rvs:					  ; nil str_rvs u64:str dos
 		jne str_rvs_loop	  ; 		utl rax equ -1
 	ret						  ; 	ret
 
-str_cpy:						  ; u64 str_cpy u64:str u16:len u64:arr dos
-	psh rdi						  ; 	STK.psh str
-	str_cpy_loop_1:				  ; 	dos
-		mov r8, [rdx]			  ; 		u64 tmp  =  arr.val
-		str_cpy_loop_2:			  ; 		dos
-			mov r9b, [r8]		  ; 			u08 chr  =  tmp.val
-			cmp r9b, 0			  ; 			cmp chr 0
-			je str_cpy_loop_2_end ; 			brk iff chr equ 0
-			mov [rdi], r9b		  ; 			str.val  =  c
-			inc rdi				  ; 			str.inc
-			inc r8				  ; 			tmp.inc
-			jmp str_cpy_loop_2	  ;				agn
-		str_cpy_loop_2_end:		  ; 			end
-		add rdx, 8				  ; 		arr.inc
-		dec sil					  ; 		len.dec
-		cmp sil, 0				  ; 		cmp len 0
-		jnz str_cpy_loop_1		  ; 		utl len equ 0
-	mov [rdi], byte 0			  ; 	str.val  =  0
-	pop rax						  ; 	u64 out  =  STK.pop ### start
-	ret							  ; 	end
+str_cpy:					  ; nil str_cpy u64:str u16:len u64:arr dos
+	mov r8, [rdx]			  ; 	u64 tmp  =  arr.val
+	str_cpy_loop_2:			  ; 	dos
+		mov r9b, [r8]		  ; 		u08 chr  =  tmp.val
+		cmp r9b, 0			  ; 		cmp chr 0
+		je str_cpy_loop_2_end ; 		brk iff chr equ 0
+		mov [rdi], r9b		  ; 		str.val  =  c
+		inc rdi				  ; 		str.inc
+		inc r8				  ; 		tmp.inc
+		jmp str_cpy_loop_2	  ;			agn
+		str_cpy_loop_2_end:	  ; 		end
+	add rdx, 8				  ; 		arr.inc
+	dec sil					  ; 		len.dec
+	cmp sil, 0				  ; 		cmp len 0
+	jnz str_cpy				  ; 		utl len equ 0
+	mov [rdi], byte 0		  ; 	str.val  =  0
+	ret						  ; 	end
 
 str_frm_u64:				  ; nil str_frm_u64 u64:bff u64:num dos
 	psh rdi					  ; 	STK.psh bff
