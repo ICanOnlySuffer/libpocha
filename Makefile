@@ -1,32 +1,43 @@
 
+OS := $(shell uname -o)
+
 AC = nasm
-A_FLAGS = -f elf64
-C_FLAGS = -O3
+A_FLAGS = -Iinclude/ -O3 -f elf64
+C_FLAGS = -Iinclude/ -O3
 
-PUTILS = $(foreach obj, str put vec dic lng, build/$(obj).o)
-TESTS = $(foreach bin, lang vector dictionary, tests/$(bin).bin)
+LIB_PUTILS = $(foreach obj, str put vec dic lng, lib/$(obj).o)
+LIB_TESTS = $(foreach obj, tester, tests/lib/$(obj).o)
+BIN_TESTS = $(addprefix tests/bin/, lang vector string dictionary)
 
-all: build $(PUTILS)
+all: lib/ $(LIB_PUTILS)
 
-build:
-	mkdir build
+%/:
+	mkdir -p $@
 
-build/%.o: putils/%.c
-	$(CC) $(C_FLAGS) -Iputils -o $@ $< -c
+ifeq ($(OS), GNU/Linux)
+lib/%.o: src/%.asm
+	$(AC) $(A_FLAGS) $< -o $@
+endif
 
-build/%.o: putils/%.asm
-	$(AC) $(A_FLAGS) -Iputils -o $@ $<
+lib/%.o: src/%.c
+	$(CC) $(C_FLAGS) -c $< -o $@
 
-tests: all tests/tester.o $(TESTS)
+tests: all tests/lib/ $(LIB_TESTS) tests/bin/ $(BIN_TESTS)
 
-tests/tester.o: tests/tester.c
-	$(CC) $(C_FLAGS) -Itests -o $@ $< -c
+tests/lib/tester.o: tests/src/tester.c
+	$(CC) $(C_FLAGS) -Itests/include/ -c $< -o $@
 
-tests/%.bin: tests/%.c
-	$(CC) $(C_FLAGS) $(PUTILS) tests/tester.o -Itests -o $@ $<
+tests/bin/%: tests/src/%.c
+	$(CC) $(C_FLAGS) -Itests/include/ lib/*.o tests/lib/*.o $< -o $@
+
+install: all
+	cp -r include/ /usr/include/putils/
+	cp -r lib/ /usr/lib/putils/
+
+uninstall:
+	rm -rf /usr/include/putils/
+	rm -rf /usr/lib/putils/
 
 clean:
-	$(RM) tests/tester.o
-	$(RM) -r build
-	$(RM) $(TESTS)
+	rm -rf lib/ tests/lib/ tests/bin/
 
