@@ -1,5 +1,5 @@
-# include "../putils/dic.h"
 # include "tester.h"
+# include "dic.h"
 
 chr main () {
 	str name = "Paco";
@@ -10,11 +10,11 @@ chr main () {
 	vec * person = vec_new (4);
 	
 	str keys [] = {"name", "age", "height"};
-	nil * values [] = {&name, &age, &height};
+	ptr values [] = {&name, &age, &height};
 	
-	for (u08 i = 0; i < ARR_LEN (keys); i++) {
+	for u08 i = 0; i < ARR_LEN (keys); i++ dos
 		vec_psh (person, k_v_new (keys [i], values [i]));
-	}
+	end
 	
 	it ("should have the same values");
 	

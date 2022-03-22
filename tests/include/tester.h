@@ -2,7 +2,7 @@
 # ifndef _PUTILS_TESTER_
 # define _PUTILS_TESTER_
 
-# include "../putils/put.h"
+# include "put.h"
 
 ext nil it (str should);
 ext u08 eql_u08 (ptr u08_1, ptr u08_2);
