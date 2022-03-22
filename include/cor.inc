@@ -1,6 +1,6 @@
 
-%ifndef COR_INC
-%define COR_INC
+%ifndef PUTILS_COR_INC
+%define PUTILS_COR_INC
 
 STD_INN equ 0		  ; con STD_INN 0
 STD_OUT equ 1		  ; con STD_OUT 1
@@ -81,7 +81,7 @@ SYS_QUT equ 60		  ; con SUS_QUT 60
 	pop rax
 	%endmacro		  ; 	end
 
-%endif ; COR_INC
+%endif ; PUTILS_COR_INC
 
 ; registers
 ; 64bit | 32bit | 16bit | 8hbit | 8lbit | keep | description

@@ -1,6 +1,6 @@
 
-# ifndef _PUTILS_VEC_
-# define _PUTILS_VEC_
+# ifndef PUTILS_VEC_H
+# define PUTILS_VEC_H
 
 # include <stdlib.h>
 # include "cor.h"
@@ -27,8 +27,8 @@ extern nil vec_clr (vec * vector);
 	vector_ -> items [vector_ -> size - 1]
 
 # define VEC_FRE(vector_) \
-	vec_clr (vector_);    \
+	vec_clr (vector_); \
 	free (vector_)
 
-# endif // _PUTILS_VEC_
+# endif // PUTILS_VEC_H
 

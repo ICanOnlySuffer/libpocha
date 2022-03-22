@@ -1,6 +1,6 @@
 
-# ifndef _PUTILS_LNG_
-# define _PUTILS_LNG_
+# ifndef PUTILS_LNG_H
+# define PUTILS_LNG_H
 
 # include <stdio.h>
 # include "str.h"
@@ -13,5 +13,5 @@
 ext str lng_get (vec * lang_directory, str key);
 ext vec * lng_lod (str path, u16 size);
 
-# endif // _PUTILS_LNG_
+# endif // PUTILS_LNG_H
 

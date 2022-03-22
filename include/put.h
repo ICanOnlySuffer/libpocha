@@ -1,6 +1,6 @@
 
-# ifndef _PUTILS_PUT_
-# define _PUTILS_PUT_
+# ifndef PUTILS_PUT_H
+# define PUTILS_PUT_H
 
 # include "str.h"
 
@@ -43,5 +43,5 @@ ext nil fil_put_arr (u64 file, u16 n_strings, str strings []);
 # define PUT_ERR_ARR(...) \
 	FIL_PUT_ARR (STD_ERR, __VA_ARGS__)
 
-# endif // _PUTILS_PUT_
+# endif // PUTILS_PUT_H
 

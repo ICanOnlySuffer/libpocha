@@ -2,7 +2,6 @@
 # ifndef PUTILS_COR_H
 # define PUTILS_COR_H
 
-# include <stddef.h>
 # include <stdint.h>
 
 // values
@@ -24,6 +23,7 @@
 # define elf } else if (
 # define els } else {
 # define end }
+# define fun {
 # define for for (
 # define dos ) {
 # define whl while (
@@ -33,6 +33,7 @@
 // typedefs
 
 # define con const
+# define enm enum
 
 typedef void nil;
 typedef void * ptr;
@@ -56,9 +57,12 @@ typedef char * str;
 // etc
 
 # define ret return
+# define def default
+# define nxt continue
 # define ext extern
-# define ARR_LEN(array_) \
-	sizeof (array_) / sizeof (*array_)
+
+# define QUT(code_) exit (code_)
+# define ARR_LEN(array_) sizeof (array_) / sizeof (*array_)
 
 # endif // PUTILS_COR_H
 

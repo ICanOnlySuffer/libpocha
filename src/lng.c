@@ -1,9 +1,9 @@
 # include "lng.h"
 
-str lng_get (vec * dictionary, str key) {
+str lng_get (vec * dictionary, str key) fun
 	str value = dic_get (dictionary, key);
 	ret value ? value : key;
-}
+end
 
 enum {
 	READING_VALUE,
@@ -13,7 +13,7 @@ enum {
 	SPACES
 } state = NEW_LINE;
 	
-vec * lng_lod (str path, u16 size) {
+vec * lng_lod (str path, u16 size) fun
 	FILE * file = fopen (path, "r");
 	iff not file thn
 		ret NIL;
@@ -72,5 +72,5 @@ vec * lng_lod (str path, u16 size) {
 	
 	fclose (file);
 	ret dictionary;
-}
+end
 
