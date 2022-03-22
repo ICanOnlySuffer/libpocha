@@ -31,12 +31,12 @@ tests/bin/%: tests/src/%.c
 	$(CC) $(C_FLAGS) -Itests/include/ lib/*.o tests/lib/*.o $< -o $@
 
 install: all
-	cp -r include/ /usr/include/putils/
-	cp -r lib/ /usr/lib/putils/
+	cp -r include/ $(DEST_DIR)/usr/include/putils/
+	cp -r lib/ $(DEST_DIR)/usr/lib/putils/
 
 uninstall:
-	rm -rf /usr/include/putils/
-	rm -rf /usr/lib/putils/
+	rm -rf $(DEST_DIR)/usr/include/putils/
+	rm -rf $(DEST_DIR)/usr/lib/putils/
 
 clean:
 	rm -rf lib/ tests/lib/ tests/bin/
