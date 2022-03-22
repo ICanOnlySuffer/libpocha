@@ -30,7 +30,7 @@ tests/lib/tester.o: tests/src/tester.c
 tests/bin/%: tests/src/%.c
 	$(CC) $(C_FLAGS) -Itests/include/ lib/*.o tests/lib/*.o $< -o $@
 
-install: all
+install: all $(DEST_DIR)/usr/include/putils/ $(DEST_DIR)/usr/lib/putils/
 	cp -r include/ $(DEST_DIR)/usr/include/putils/
 	cp -r lib/ $(DEST_DIR)/usr/lib/putils/
 
