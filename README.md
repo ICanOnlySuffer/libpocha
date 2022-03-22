@@ -1,22 +1,22 @@
 # putils (pocha-utils)
 
-C utils library of headers for the average project.
+C utils library for the average project.
 
 ## Installation
 
-	$ git clone https://github.com/ICanOnlySuffer/putils
+	$ git clone https://github.com/ICanOnlySuffer/putils/releases/latest
 	$ cd putils
-	# ./install
+	# make install && make clean
 
 ## Uninstallation
 
-	# ./uninstall
+	# make uninstall
 
 ## Contributing
 
 Bug reports, suggestions and pull request are welcome!
 
-Try to keep files under 100 lines.
+Try to keep each file under 100 lines.
 
 ## Licence
 
