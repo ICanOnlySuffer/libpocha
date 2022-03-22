@@ -9,7 +9,7 @@
 # define STD_ERR 2
 
 ext nil fil_put (u64 file, str string);
-ext nil fil_put_chr (u64 file, u08 character);
+ext nil fil_put_chr (u64 file, chr character);
 ext nil fil_put_arr (u64 file, u16 n_strings, str strings []);
 
 # define PUT(string_) \

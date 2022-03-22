@@ -10,17 +10,50 @@ SYS_RED equ 0		  ; con SYS_RED 0
 SYS_WRT equ 1		  ; con SYS_WRT 1
 SYS_QUT equ 60		  ; con SUS_QUT 60
 
-%macro psh 1		  ; mac psh val dos
-	push %1			  ; 	push val
-	%endmacro		  ; 	end
+%define l_0 rax
+%define l_1 rdi
+%define l_2 rsi
+%define l_3 rdx
+%define l_4 rcx
+%define l_5 r8
+%define l_6 r9
+%define l_7 r10
 
-%macro cll 1		  ; mac cll fun dos
-	call %1			  ; 	call fun
-	%endmacro		  ; 	end
+%define i_0 eax
+%define i_1 edi
+%define i_2 esi
+%define i_3 edx
+%define i_4 ecx
+%define i_5 r8d
+%define i_6 r9d
+%define i_7 r10d
 
-%macro mvz 2		  ; mac mvz reg val dos
-	movzx %1, %2	  ; 	movz reg val
-	%endmacro		  ; 	end
+%define s_0 ax
+%define s_1 di
+%define s_2 si
+%define s_3 dx
+%define s_4 cx
+%define s_5 r8w
+%define s_6 r9w
+%define s_7 r10w
+
+%define b_0 al
+%define b_1 dil
+%define b_2 sil
+%define b_3 dl
+%define b_4 cl
+%define b_5 r8b
+%define b_6 r9b
+%define b_7 r10b
+
+%define h_0 ah
+%define h_3 dh
+%define h_4 ch
+
+%define psh push
+%define cll call
+%define mvz movzx
+%define sys_cll syscall
 
 %macro qut 1		  ; mac qut u08:cde dos
 	mov rax, SYS_QUT  ; 	u64 sys <-- SYS_QUT
@@ -62,7 +95,7 @@ SYS_QUT equ 60		  ; con SUS_QUT 60
 ; rdi   | edi   | di    | n/a   | dil   | no   | parameter #1
 ; r8    | r8d   | r8w   | n/a   | r8b   | no   | parameter #5
 ; r9    | r9d   | r9w   | n/a   | r9b   | no   | parameter #6
-; r10   | r10d  | r10w  | r10w  | r10b  | no   | parameter #7
+; r10   | r10d  | r10w  | n/a   | r10b  | no   | parameter #7
 
 ; parameter registers
 ; fun cll: rdi, rsi, rdx, rcx, r8, r9

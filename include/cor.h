@@ -19,13 +19,15 @@
 
 // logic
 
-# define iff(stuff_) if (stuff_)
-# define unl(stuff_) if (not (stuff_))
-# define whl(stuff_) while (stuff_)
-# define utl(stuff_) while (not (stuff_))
-# define elf(stuff_) else if (stuff_)
-# define els else
-# define cse(stuff_) switch (stuff_)
+# define iff if (
+# define thn ) {
+# define elf } else if (
+# define els } else {
+# define end }
+# define for for (
+# define dos ) {
+# define whl while (
+# define swi switch (
 # define whn case
 
 // typedefs

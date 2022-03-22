@@ -20,40 +20,40 @@ vec * vec_new (u32 capacity) {
 
 nil vec_rsz (vec * vector, u32 capacity) {
 	ptr * items = realloc (vector -> items, sizeof (ptr) * capacity);
-	iff (items) {
+	iff items thn
 		vector -> items = items;
 		vector -> capacity = capacity;
-	}
+	end
 }
 
 nil vec_psh (vec * vector, ptr item) {
-	iff (vector -> capacity == vector -> size) {
+	iff vector -> capacity == vector -> size thn
 		vec_rsz (vector, vector -> capacity * 2);
-	}
+	end
 	vector -> items [vector -> size++] = item;
 }
 
 nil vec_psh_arr (vec * vector, ptr items [], u16 size) {
-	iff (vector -> capacity < vector -> size + size) {
+	iff vector -> capacity < vector -> size + size thn
 		vec_rsz (vector, next_2n (vector -> size + size));
-	}
-	whl (vector -> size < size) {
+	end
+	whl vector -> size < size dos
 		vector -> items [vector -> size++] = *items++;
-	}
+	end
 }
 
 nil vec_rmv (vec * vector, u16 index) {
-	whl (index < vector -> size) {
+	whl index < vector -> size dos
 		vector -> items [index] = vector -> items [index + 1];
 		index++;
-	}
+	end
 	vector -> items [--vector -> size] = NIL;
 }
 
 nil vec_clr (vec * vector) {
-	for (u32 i = 0; i < vector -> size; i++) {
+	for u32 i = 0; i < vector -> size; i++ dos
 		free (vector -> items [i]);
-	}
+	end
 	vector -> size = 0;
 }
 
