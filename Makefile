@@ -5,7 +5,7 @@ AC = nasm
 A_FLAGS = -Iinclude/ -O3 -f elf64
 C_FLAGS = -Iinclude/ -O3
 
-LIB_PUTILS = $(foreach obj, str put vec dic lng, lib/$(obj).o)
+LIB_PUTILS = $(foreach obj, str num put vec dic lng, lib/$(obj).o)
 LIB_TESTS = $(foreach obj, tester, tests/lib/$(obj).o)
 BIN_TESTS = $(addprefix tests/bin/, lang vector string dictionary)
 
