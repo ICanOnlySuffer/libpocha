@@ -46,13 +46,17 @@ SYS_QUT equ 60		  ; con SUS_QUT 60
 %define b_6 r9b
 %define b_7 r10b
 
-%define h_0 ah
-%define h_3 dh
-%define h_4 ch
+%define c_0 ah
+%define c_3 dh
+%define c_4 ch
 
 %define psh push
 %define cll call
 %define mvz movzx
+
+%define jeq je
+%define tst test
+
 %define sys_cll syscall
 
 %macro qut 1		  ; mac qut u08:cde dos
