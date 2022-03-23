@@ -4,12 +4,12 @@
 
 # include "cor.h"
 
-extern u64 str_len (str string);
-extern nil str_chp (str string);
-extern nil str_rvs (str string);
-extern s16 str_cmp (str string_1, str string_2);
-extern nil str_cpy (str buffer, u16 n_strings, str strings []);
-extern nil str_frm_u64 (str buffer, u64 number);
+ext u64 str_len (str string);
+ext nil str_chp (str string);
+ext nil str_rvs (str string);
+ext s16 str_cmp (str string_1, str string_2);
+ext nil str_cpy (str buffer, u16 n_strings, str strings []);
+ext nil str_frm_u64 (str buffer, u64 number);
 
 # define STR_CPY(buffer_, ...) \
 	str_cpy ( \

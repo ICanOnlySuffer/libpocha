@@ -54,4 +54,3 @@ nil str_frm_u64 (str buffer, u64 number) fun
 	str_rvs (start);
 end
 
-
