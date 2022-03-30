@@ -11,9 +11,7 @@ typedef struct {
 	u16 size;
 } vec;
 
-extern u32 next_2n (u32 number);
 extern vec * vec_new (u32 capacity);
-
 extern nil vec_rsz (vec * vector, u32 capacity);
 extern nil vec_psh (vec * vector, nil * item);
 extern nil vec_psh_arr (vec * vector, nil * items [], u16 size);
@@ -26,7 +24,7 @@ extern nil vec_clr (vec * vector);
 # define VEC_LST(vector_) \
 	vector_ -> items [vector_ -> size - 1]
 
-# define VEC_FRE(vector_) \
+# define VEC_DEL(vector_) \
 	vec_clr (vector_); \
 	free (vector_)
 
