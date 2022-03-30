@@ -16,20 +16,6 @@
 # define not !
 # define or ||
 
-// logic
-
-# define iff if (
-# define thn ) {
-# define elf } else if (
-# define els } else {
-# define end }
-# define fun {
-# define for for (
-# define dos ) {
-# define whl while (
-# define swi switch (
-# define whn case
-
 // typedefs
 
 # define con const

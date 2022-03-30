@@ -1,6 +1,6 @@
 # include "str.h"
 
-u64 str_len (str string) fun
+u64 str_len (str string) {
 	u64 len = -1;
 	--string;
 	
@@ -9,42 +9,42 @@ u64 str_len (str string) fun
 	} while (*++string);
 	
 	ret len;
-end
+}
 
-nil str_chp (str string) fun
+nil str_chp (str string) {
 	string [str_len (string)] = 0;
-end
+}
 
-s16 str_cmp (str string_1, str string_2) fun
-	whl *string_1 and *string_1 == *string_2 dos
+s16 str_cmp (str string_1, str string_2) {
+	while (*string_1 and *string_1 == *string_2) {
 		++string_1;
 		++string_2;
-	end
+	}
 	ret (s16) *string_1 - (s16) *string_2;
-end
+}
 
-nil str_rvs (str string) fun
+nil str_rvs (str string) {
 	for u64 i = 0, j = str_len (string) - 1; i < j; i++, j-- dos
 		chr temp = string [i];
 		string [i] = string [j];
 		string [j] = temp;
-	end
-end
+	}
+}
 
-nil str_cpy (str buffer, u16 n_strings, str strings []) fun
+nil str_cpy (str buffer, u16 n_strings, str strings []) {
 	do {
-		whl **strings dos
+		while (**strings) {
 			*buffer = **strings;
 			++*strings;
 			++buffer;
-		end
+		}
 		--n_strings;
 		++strings;
 	} while (n_strings);
 	*buffer = 0;
-end
+}
 
-nil str_frm_u64 (str buffer, u64 number) fun
+nil str_frm_u64 (str buffer, u64 number) {
 	str start = buffer;
 	do {
 		*buffer = 48 + (number % 10);
@@ -52,5 +52,5 @@ nil str_frm_u64 (str buffer, u64 number) fun
 	} while (number /= 10);
 	*buffer = 0;
 	str_rvs (start);
-end
+}
 

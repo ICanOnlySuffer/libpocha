@@ -1,9 +1,9 @@
 # include "lng.h"
 
-str lng_get (vec * dictionary, str key) fun
+str lng_get (vec * dictionary, str key) {
 	str value = dic_get (dictionary, key);
 	ret value ? value : key;
-end
+}
 
 enum {
 	READING_VALUE,
@@ -13,11 +13,11 @@ enum {
 	SPACES
 } state = NEW_LINE;
 	
-vec * lng_lod (str path, u16 size) fun
+vec * lng_lod (str path, u16 size) {
 	FILE * file = fopen (path, "r");
-	iff not file thn
+	if (not file) {
 		ret NIL;
-	end
+	}
 	
 	vec * dictionary = vec_new (32);
 	str buffer = calloc (size, sizeof (chr));
@@ -26,51 +26,51 @@ vec * lng_lod (str path, u16 size) fun
 	str value;
 	str key;
 	
-	for u16 i = 0; c != EOF and i < size; c = fgetc (file) dos
-		swi state dos
-		whn READING_VALUE:
-			iff c == '\n' thn
+	for (u16 i = 0; c != EOF and i < size; c = fgetc (file)) {
+		switch (state) {
+		case READING_VALUE:
+			if (c == '\n') {
 				state = NEW_LINE;
 				buffer [i] = 0;
 				vec_psh (dictionary, k_v_new (key, value));
-			els
+			} else {
 				buffer [i] = c;
-			end
+			}
 			i++;
 			break;
-		whn READING_KEY:
-			iff c == ' ' or c == '\t' thn
+		case READING_KEY:
+			if (c == ' ' or c == '\t') {
 				state = SPACES;
 				buffer [i] = 0;
-			els
+			} else {
 				buffer [i] = c;
-			end
+			}
 			i++;
 			break;
-		whn NEW_LINE:
-			iff c == '#' thn
+		case NEW_LINE:
+			if (c == '#') {
 				state = COMMENT;
-			elf c != '\t' and c != ' ' and c != '\n' thn
+			} else if (c != '\t' and c != ' ' and c != '\n') {
 				state = READING_KEY;
 				buffer [i] = c;
 				key = &buffer [i++];
-			end
+			}
 			break;
-		whn COMMENT:
-			iff c == '\n' thn
+		case COMMENT:
+			if (c == '\n') {
 				state = NEW_LINE;
-			end
+			}
 			break;
-		whn SPACES:
-			iff c != ' ' and c != '\t' thn
+		case SPACES:
+			if (c != ' ' and c != '\t') {
 				state = READING_VALUE;
 				buffer [i] = c;
 				value = &buffer [i++];
-			end
-		end
-	end
+			}
+		}
+	}
 	
 	fclose (file);
 	ret dictionary;
-end
+}
 

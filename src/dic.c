@@ -9,9 +9,9 @@ k_v * k_v_new (str key, ptr value) {
 }
 
 str dic_get (vec * dictionary, str key) {
-	for u16 i = 0; i < dictionary -> size; i++ dos
+	for (u16 i = 0; i < dictionary -> size; i++) {
 		k_v * key_value = dictionary -> items [i];
-		iff STR_EQL (key_value -> key, key) thn
+		if (STR_EQL (key_value -> key, key)) {
 			ret key_value -> value;
 		}
 	}
