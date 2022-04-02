@@ -1,15 +1,14 @@
 
 OS := $(shell uname -o)
+PREFIX := /usr
 
 AC = nasm
 A_FLAGS = -Iinclude/ -O3 -f elf64
 C_FLAGS = -Iinclude/ -O3
 
-LIB_PUTILS = $(foreach obj, str num put vec dic lng, lib/$(obj).o)
-LIB_TESTS = $(foreach obj, tester, tests/lib/$(obj).o)
-BIN_TESTS = $(addprefix tests/bin/, lang vector string dictionary)
+LIB = $(foreach obj, str num put vec dic lng, lib/$(obj).o)
 
-all: lib/ $(LIB_PUTILS)
+all: lib/ $(LIB)
 
 %/:
 	mkdir -p $@
@@ -22,22 +21,14 @@ endif
 lib/%.o: src/%.c
 	$(CC) $(C_FLAGS) -c $< -o $@
 
-tests: all tests/lib/ $(LIB_TESTS) tests/bin/ $(BIN_TESTS)
-
-tests/lib/tester.o: tests/src/tester.c
-	$(CC) $(C_FLAGS) -Itests/include/ -c $< -o $@
-
-tests/bin/%: tests/src/%.c
-	$(CC) $(C_FLAGS) -Itests/include/ lib/*.o tests/lib/*.o $< -o $@
-
-install: all $(DEST_DIR)/usr/include/ $(DEST_DIR)/usr/lib/
-	cp -r include/ $(DEST_DIR)/usr/include/putils/
-	cp -r lib/ $(DEST_DIR)/usr/lib/putils/
+install: all $(DEST_DIR)$(PREFIX)/include/ $(DEST_DIR)$(PREFIX)/lib/
+	cp -r include/ $(DEST_DIR)$(PREFIX)/include/pul/
+	cp -r lib/ $(DEST_DIR)$(PREFIX)/lib/pul/
 
 uninstall:
-	rm -rf $(DEST_DIR)/usr/include/putils/
-	rm -rf $(DEST_DIR)/usr/lib/putils/
+	rm -rf $(DEST_DIR)$(PREFIX)/include/pul/
+	rm -rf $(DEST_DIR)$(PREFIX)/lib/pul/
 
 clean:
-	rm -rf lib/ tests/lib/ tests/bin/
+	rm -rf lib/
 
