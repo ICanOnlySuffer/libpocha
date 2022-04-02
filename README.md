@@ -1,16 +1,15 @@
-# putils (pocha-utils)
+# pul (pocha's utils library)
 
 C utils library for the average project.
 
 ## Installation
 
-	$ git clone https://github.com/ICanOnlySuffer/putils/releases/latest
-	$ cd putils
-	# make install && make clean
+	$ git clone https://github.com/ICanOnlySuffer/pul
+	# make -C pul install clean
 
 ## Uninstallation
 
-	# make uninstall
+	# make -C uninstall
 
 ## Contributing
 
