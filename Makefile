@@ -1,6 +1,7 @@
 
 OS := $(shell uname -o)
 PREFIX := /usr
+BUILD = $(DEST_DIR)$(PREFIX)
 
 AC = nasm
 A_FLAGS = -Iinclude/ -O3 -f elf64
@@ -21,13 +22,13 @@ endif
 lib/%.o: src/%.c
 	$(CC) $(C_FLAGS) -c $< -o $@
 
-install: all $(DEST_DIR)$(PREFIX)/include/ $(DEST_DIR)$(PREFIX)/lib/
-	cp -r include/ $(DEST_DIR)$(PREFIX)/include/pul/
-	cp -r lib/ $(DEST_DIR)$(PREFIX)/lib/pul/
+install: all $(BUILD)/include/pul/ $(BUILD)/lib/pul/
+	cp -ru include/* $(BUILD)/include/pul/
+	cp -ru lib/* $(BUILD)/lib/pul/
 
 uninstall:
-	rm -rf $(DEST_DIR)$(PREFIX)/include/pul/
-	rm -rf $(DEST_DIR)$(PREFIX)/lib/pul/
+	rm -rf $(BUILD)/include/pul/
+	rm -rf $(BUILD)/lib/pul/
 
 clean:
 	rm -rf lib/
