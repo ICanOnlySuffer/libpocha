@@ -10,6 +10,12 @@
 # define PATH_SIZE 1024
 # endif
 
+# define READING_VALUE 0
+# define READING_KEY 1
+# define NEW_LINE 2
+# define COMMENT 3
+# define SPACES 4
+
 ext str lng_get (vec * lang_directory, str key);
 ext vec * lng_lod (str path, u16 size);
 
