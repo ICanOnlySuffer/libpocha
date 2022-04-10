@@ -4,12 +4,9 @@ C utils library for the average project.
 
 ## Installation
 
-	$ git clone https://github.com/ICanOnlySuffer/pul
-	# make -C pul install clean
-
-## Uninstallation
-
-	# make -C uninstall
+	1. Download the [latest release](https://github.com/ICanOnlySuffer/pul/releases/latest)
+	2. Extract it (`$ tar -xf pul-VERSION.tar.gz`)
+	3. Install it (`# make -C pul-VERSION install`)
 
 ## Contributing
 
