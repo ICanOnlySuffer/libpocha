@@ -1,17 +1,12 @@
-# include "lng.h"
+# include "cnf.h"
 
-str lng_get (vec * dictionary, str key) FUN
-	str value = dic_get (dictionary, key);
-	ret value ? value : key;
-END
-
-vec * lng_lod (str path, u16 size) FUN
+vec cnf_get (str path, u16 size) FUN
 	FILE * file = fopen (path, "r");
 	IFF not file THN
-		ret NIL;
+		RET VEC_NEW (0);
 	END
 	
-	vec * dictionary = vec_new (32);
+	vec dictionary = VEC_NEW (32);
 	str buffer = calloc (size, sizeof (chr));
 	u08 state = NEW_LINE;
 	
@@ -25,12 +20,13 @@ vec * lng_lod (str path, u16 size) FUN
 			IFF c == '\n' THN
 				state = NEW_LINE;
 				buffer [i] = 0;
-				vec_psh (dictionary, k_v_new (key, value));
+				k_v * key_value = k_v_new (key_frm_str (key), value);
+				vec_psh (&dictionary, key_value);
 			ELS
 				buffer [i] = c;
 			END
 			i++;
-			break;
+			BRK;
 		WHN READING_KEY:
 			IFF c == ' ' or c == '\t' THN
 				state = SPACES;
@@ -39,7 +35,7 @@ vec * lng_lod (str path, u16 size) FUN
 				buffer [i] = c;
 			END
 			i++;
-			break;
+			BRK;
 		WHN NEW_LINE:
 			IFF c == '#' THN
 				state = COMMENT;
@@ -48,12 +44,12 @@ vec * lng_lod (str path, u16 size) FUN
 				buffer [i] = c;
 				key = &buffer [i++];
 			END
-			break;
+			BRK;
 		WHN COMMENT:
 			IFF c == '\n' THN
 				state = NEW_LINE;
 			END
-			break;
+			BRK;
 		WHN SPACES:
 			IFF c != ' ' and c != '\t' THN
 				state = READING_VALUE;
@@ -64,6 +60,6 @@ vec * lng_lod (str path, u16 size) FUN
 	END
 	
 	fclose (file);
-	ret dictionary;
+	RET dictionary;
 END
 
