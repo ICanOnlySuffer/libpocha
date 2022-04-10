@@ -5,7 +5,7 @@ u64 u64_pow_u64 (u64 number, u64 power) FUN
 	WHL power-- dos DOS
 		out *= number;
 	END
-	ret out;
+	RET out;
 END
 
 u64 u64_frm_str (str string) FUN
@@ -16,6 +16,6 @@ u64 u64_frm_str (str string) FUN
 		number += (*(string++) - 48) * u64_pow_u64 (10, length);
 	END
 	
-	ret number;
+	RET number;
 END
 

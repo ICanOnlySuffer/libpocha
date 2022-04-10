@@ -3,12 +3,10 @@
 u64 str_len (str string) FUN
 	u64 len = -1;
 	--string;
-	
 	do {
 		++len;
 	} while (*++string);
-	
-	ret len;
+	RET len;
 END
 
 nil str_chp (str string) FUN
@@ -20,7 +18,7 @@ s16 str_cmp (str string_1, str string_2) FUN
 		++string_1;
 		++string_2;
 	END
-	ret (s16) *string_1 - (s16) *string_2;
+	RET (s16) *string_1 - (s16) *string_2;
 END
 
 nil str_rvs (str string) FUN
