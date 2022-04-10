@@ -1,6 +1,8 @@
 
-# ifndef PUTILS_COR_H
-# define PUTILS_COR_H
+# ifndef PUL_COR_H
+# define PUL_COR_H
+
+# define PUL_VERSION "v0.4.0"
 
 # include <stdint.h>
 
@@ -56,13 +58,15 @@ typedef char * str;
 
 // etc
 
-# define ret return
-# define def default
-# define nxt continue
-# define ext extern
+# define BRK break
+# define RET return
+# define NXT continue
+# define EXT extern
+# define STC static
+# define INL inline
 
 # define QUT(code_) exit (code_)
 # define ARR_LEN(array_) sizeof (array_) / sizeof (*array_)
 
-# endif // PUTILS_COR_H
+# endif // PUL_COR_H
 
