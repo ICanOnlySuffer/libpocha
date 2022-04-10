@@ -1,13 +1,5 @@
 # include "vec.h"
 
-vec * vec_new (u32 capacity) FUN
-	vec * vector = malloc (sizeof (vec));
-	vector -> items = malloc (sizeof (ptr) * capacity);
-	vector -> capacity = capacity;
-	vector -> size = 0;
-	ret vector;
-END
-
 nil vec_rsz (vec * vector, u32 capacity) FUN
 	ptr * items = realloc (vector -> items, sizeof (ptr) * capacity);
 	IFF items THN
