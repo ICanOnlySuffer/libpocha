@@ -1,12 +1,12 @@
-# pul (pocha's utils library)
+# pul (pocha's utility library)
 
-C utils library for the average project.
+C utility library for the average project.
 
 ## Installation
 
-	- Download the [latest release](https://github.com/ICanOnlySuffer/pul/releases/latest)
-	- Extract it (`$ tar -xf pul-VERSION.tar.gz`)
-	- Install it (`# make -C pul-VERSION install`)
+- Download the [latest release](https://github.com/ICanOnlySuffer/pul/releases/latest)
+- Extract it (`$ tar -xf pul-VERSION.tar.gz`)
+- Install it (`# make -C pul-VERSION install clean`)
 
 ## Contributing
 
