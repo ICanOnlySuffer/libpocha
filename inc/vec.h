@@ -14,8 +14,12 @@ typedef struct {
 EXT nil vec_rsz (vec * vector, u32 capacity);
 EXT nil vec_psh (vec * vector, ptr item);
 EXT nil vec_psh_arr (vec * vector, ptr items [], u16 size);
-EXT nil vec_rmv (vec * vector, u16 index);
+EXT nil vec_rmv_idx (vec * vector, u16 index);
+EXT u16 vec_idx (vec * vector, ptr pointer);
 EXT nil vec_clr (vec * vector);
+STC INL nil vec_rmv (vec * vector, ptr pointer) FUN
+	vec_rmv_idx (vector, vec_idx (vector, pointer));
+END
 STC INL vec * vec_new (u32 capacity) FUN
 	vec * vector = malloc (sizeof (vector));
 	vector -> items = malloc (sizeof (ptr) * capacity);
