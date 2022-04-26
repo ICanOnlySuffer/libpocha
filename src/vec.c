@@ -24,12 +24,22 @@ nil vec_psh_arr (vec * vector, ptr items [], u16 size) FUN
 	END
 END
 
-nil vec_rmv (vec * vector, u16 index) FUN
+nil vec_rmv_idx (vec * vector, u16 index) FUN
 	WHL index < vector -> size DOS
 		vector -> items [index] = vector -> items [index + 1];
 		index++;
 	END
 	vector -> items [--vector -> size] = NIL;
+END
+
+u16 vec_idx (vec * vector, ptr pointer) FUN
+	u16 i;
+	FOR i = 0; i < vector -> size; i++ DOS
+		IFF vector -> items [i] == pointer DOS
+			BRK;
+		END
+	END
+	RET i;
 END
 
 nil vec_clr (vec * vector) FUN

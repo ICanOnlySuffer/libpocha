@@ -2,7 +2,7 @@
 
 u64 u64_pow_u64 (u64 number, u64 power) FUN
 	u64 out = 1;
-	WHL power-- dos DOS
+	WHL power-- DOS
 		out *= number;
 	END
 	RET out;
