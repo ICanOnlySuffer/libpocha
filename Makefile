@@ -18,22 +18,24 @@ else
 ifeq ($(OS), gnu+linux)
 	DIR_INC = /usr/include
 	DIR_LIB = /usr/lib
-	DIR_OBJ = obj-lin
 	CC := cc
 	AC = nasm
 	A_FLAGS = -Iinc/ -O3 -f elf64
+	ARCH = $(shell uname -m)
 else
 ifeq ($(OS), windows)
 	DIR_INC = /usr/x86_64-w64-mingw32/include
 	DIR_LIB = /usr/x86_64-w64-mingw32/lib
-	DIR_OBJ = obj-win
 	CC := x86_64-w64-mingw32-cc
 else
 all: $(error operating system `$(OS)` not supported)
 endif
 endif
-	SRC = $(shell find src -name '*.c') 
-	OBJ = $(SRC:src/%.c=$(DIR_OBJ)/%.o)
+
+DIR_OBJ = obj-$(OS)
+SRC = $(shell find src -name '*.c') 
+OBJ = $(SRC:src/%.c=$(DIR_OBJ)/%.o)
+
 all: $(DIR_OBJ)/ $(OBJ)
 
 DIR_INSTALL_INC = $(DIR_INSTALL)$(DIR_INC)
@@ -44,7 +46,7 @@ C_FLAGS = -Iinc/ -O3
 %/:
 	mkdir -p $@
 
-ifeq ($(OS), gnu+linux)
+ifeq ($(ARCH), x86_64)
 $(DIR_OBJ)/%.o: src/%.asm
 	$(AC) $< -o $@ $(A_FLAGS)
 endif
@@ -52,7 +54,7 @@ endif
 $(DIR_OBJ)/%.o: src/%.c
 	$(CC) -c $< -o $@ $(C_FLAGS)
 
-install: uninstall $(DIR_INSTALL_INC)/pul/ $(DIR_INSTALL_LIB)/pul/
+install: uninstall all $(DIR_INSTALL_INC)/pul/ $(DIR_INSTALL_LIB)/pul/
 	cp -ru inc/* $(DIR_INSTALL_INC)/pul/
 	cp -ru $(DIR_OBJ)/* $(DIR_INSTALL_LIB)/pul/
 
