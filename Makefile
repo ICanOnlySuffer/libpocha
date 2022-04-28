@@ -18,6 +18,7 @@ else
 ifeq ($(OS), gnu+linux)
 	DIR_INC = /usr/include
 	DIR_LIB = /usr/lib
+	DIR_BIN = /usr/bin
 	CC := cc
 	AC = nasm
 	A_FLAGS = -Iinc/ -O3 -f elf64
@@ -26,6 +27,7 @@ else
 ifeq ($(OS), windows)
 	DIR_INC = /usr/x86_64-w64-mingw32/include
 	DIR_LIB = /usr/x86_64-w64-mingw32/lib
+	DIR_BIN = /usr/x86_64-w64-mingw32/bin
 	CC := x86_64-w64-mingw32-cc
 else
 all: $(error operating system `$(OS)` not supported)
@@ -40,6 +42,7 @@ all: $(DIR_OBJ)/ $(OBJ)
 
 DIR_INSTALL_INC = $(DIR_INSTALL)$(DIR_INC)
 DIR_INSTALL_LIB = $(DIR_INSTALL)$(DIR_LIB)
+DIR_INSTALL_BIN = $(DIR_INSTALL)$(DIR_BIN)
 
 C_FLAGS = -Iinc/ -O3
 
@@ -57,9 +60,12 @@ $(DIR_OBJ)/%.o: src/%.c
 install: uninstall all $(DIR_INSTALL_INC)/pul/ $(DIR_INSTALL_LIB)/pul/
 	cp -ru inc/* $(DIR_INSTALL_INC)/pul/
 	cp -ru $(DIR_OBJ)/* $(DIR_INSTALL_LIB)/pul/
+	cp -u bin/* $(DIR_INSTALL_BIN)/pul
 
 uninstall:
-	rm -rf $(DIR_INSTALL_INC)/pul/ $(DIR_INSTALL_LIB)/pul/
+	rm -rf $(DIR_INSTALL_INC)/pul/
+	rm -rf $(DIR_INSTALL_LIB)/pul/
+	rm -rf $(DIR_INSTALL_BIN)/pul
 endif
 
 clean:
