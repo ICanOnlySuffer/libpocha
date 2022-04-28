@@ -8,33 +8,33 @@
 # define STD_OUT 1
 # define STD_ERR 2
 
-EXT nil fil_put (u64 file, str string);
-EXT nil fil_put_chr (u64 file, chr character);
-EXT nil fil_put_arr (u64 file, u16 n_strings, str strings []);
+extern nil fil_put (u64 file, str string);
+extern nil fil_put_chr (u64 file, chr character);
+extern nil fil_put_arr (u64 file, u16 n_strings, str strings []);
+stainl nil put (str string) {
+	fil_put (STD_OUT, string);
+}
+stainl nil put_err (str string) {
+	fil_put (STD_ERR, string);
+}
+stainl nil put_chr (chr character) {
+	fil_put_chr (STD_OUT, character);
+}
+stainl nil put_chr_err (chr character) {
+	fil_put_chr (STD_ERR, character);
+}
+stainl nil new_lne () {
+	put_chr ('\n');
+}
+stainl nil new_lne_err () {
+	put_chr_err ('\n');
+}
 
-# define PUT(string_) \
-	fil_put (STD_OUT, string_)
-
-# define PUT_ERR(string_) \
-	fil_put (STD_ERR, string_)
-
-# define PUT_CHR(char_) \
-	fil_put_chr (STD_OUT, char_)
-
-# define PUT_CHR_ERR(char_) \
-	fil_put_chr (STD_ERR, char_)
-
-# define NEW_LNE() \
-	PUT_CHR ('\n')
-
-# define NEW_LNE_ERR() \
-	PUT_CHR_ERR ('\n')
-
-# define FIL_PUT_ARR(file_, ...)                        \
-	fil_put_arr (                                       \
-		file_,                                          \
+# define FIL_PUT_ARR(file_, ...) \
+	fil_put_arr ( \
+		file_, \
 		sizeof ((str []) {__VA_ARGS__}) / sizeof (str), \
-		(str []) {__VA_ARGS__}                          \
+		(str []) {__VA_ARGS__} \
 	)
 
 # define PUT_ARR(...) \

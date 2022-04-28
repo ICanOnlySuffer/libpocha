@@ -8,19 +8,22 @@
 typedef struct {
 	u64 key;
 	ptr value;
-} k_v;
+} key_val;
 
-EXT u64 key_frm_str (str string);
-EXT ptr dic_get (vec * dictionary, u64 key);
-STC INL k_v * k_v_new (u64 key, ptr value) FUN
-	k_v * key_value = malloc (sizeof (k_v));
+extern u64 key_frm_str (str string);
+extern ptr dic_get (vec * dictionary, u64 key);
+stainl key_val * key_val_new (u64 key, ptr value) {
+	key_val * key_value = malloc (sizeof (key_val));
 	key_value -> key = key;
 	key_value -> value = value;
-	RET key_value;
-END
-
-# define K_V_NEW(key_, value_) \
-	(k_v) {.key = key_, .value = value_}
+	return key_value;
+}
+stainl key_val KEY_VAL (u64 key, ptr value) {
+	return (key_val) {key, value};
+}
+stainl nil dic_psh (vec * dictionary, u64 key, ptr value) {
+	vec_psh (dictionary, key_val_new (key, value));
+}
 
 # endif // PUL_DIC_H
 

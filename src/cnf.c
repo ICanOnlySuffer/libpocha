@@ -1,12 +1,17 @@
 # include "cnf.h"
+# define READING_VALUE 0
+# define READING_KEY 1
+# define NEW_LINE 2
+# define COMMENT 3
+# define SPACES 4
 
-vec cnf_get (str path, u16 size) FUN
+vec cnf_get (str path, u16 size) {
 	FILE * file = fopen (path, "r");
-	IFF not file THN
-		RET VEC_NEW (0);
-	END
+	if (not file) {
+		return VEC (0);
+	}
 	
-	vec dictionary = VEC_NEW (32);
+	vec dictionary = VEC (32);
 	str buffer = calloc (size, sizeof (chr));
 	u08 state = NEW_LINE;
 	
@@ -14,52 +19,51 @@ vec cnf_get (str path, u16 size) FUN
 	str value;
 	str key;
 	
-	FOR u16 i = 0; c != EOF and i < size; c = fgetc (file) DOS
-		SWI state DOS
-		WHN READING_VALUE:
-			IFF c == '\n' THN
+	for (u16 i = 0; c != EOF and i < size; c = fgetc (file)) {
+		switch (state) {
+		case READING_VALUE:
+			if (c == '\n') {
 				state = NEW_LINE;
 				buffer [i] = 0;
-				k_v * key_value = k_v_new (key_frm_str (key), value);
-				vec_psh (&dictionary, key_value);
-			ELS
+				dic_psh (&dictionary, key_frm_str (key), value);
+			} else {
 				buffer [i] = c;
-			END
+			}
 			i++;
-			BRK;
-		WHN READING_KEY:
-			IFF c == ' ' or c == '\t' THN
+			break;
+		case READING_KEY:
+			if (c == ' ' or c == '\t') {
 				state = SPACES;
 				buffer [i] = 0;
-			ELS
+			} else {
 				buffer [i] = c;
-			END
+			}
 			i++;
-			BRK;
-		WHN NEW_LINE:
-			IFF c == '#' THN
+			break;
+		case NEW_LINE:
+			if (c == '#') {
 				state = COMMENT;
-			ELF c != '\t' and c != ' ' and c != '\n' THN
+			} else if (c != '\t' and c != ' ' and c != '\n') {
 				state = READING_KEY;
 				buffer [i] = c;
 				key = &buffer [i++];
-			END
-			BRK;
-		WHN COMMENT:
-			IFF c == '\n' THN
+			}
+			break;
+		case COMMENT:
+			if (c == '\n') {
 				state = NEW_LINE;
-			END
-			BRK;
-		WHN SPACES:
-			IFF c != ' ' and c != '\t' THN
+			}
+			break;
+		case SPACES:
+			if (c != ' ' and c != '\t') {
 				state = READING_VALUE;
 				buffer [i] = c;
 				value = &buffer [i++];
-			END
-		END
-	END
+			}
+		}
+	}
 	
 	fclose (file);
-	RET dictionary;
-END
+	return dictionary;
+}
 

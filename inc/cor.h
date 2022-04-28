@@ -1,10 +1,13 @@
 
 # ifndef PUL_COR_H
 # define PUL_COR_H
-
-# define PUL_VERSION "v0.4.0"
-
 # include <stdint.h>
+
+// version
+
+# define PUL_VERSION_MAYOR 0
+# define PUL_VERSION_MINOR 4
+# define PUL_VERSION_PATCH 0
 
 // values
 
@@ -17,25 +20,6 @@
 # define and &&
 # define not !
 # define or ||
-
-// logic
-
-# define IFF if (
-# define THN ) {
-# define ELF } else if (
-# define ELS } else {
-# define END }
-# define FUN {
-# define FOR for (
-# define DOS ) {
-# define WHL while (
-# define SWI switch (
-# define WHN case
-
-// typedefs
-
-# define con const
-# define enm enum
 
 typedef void nil;
 typedef void * ptr;
@@ -58,14 +42,7 @@ typedef char * str;
 
 // etc
 
-# define BRK break
-# define RET return
-# define NXT continue
-# define EXT extern
-# define STC static
-# define INL inline
-
-# define QUT(code_) exit (code_)
+# define stainl static inline
 # define ARR_LEN(array_) sizeof (array_) / sizeof (*array_)
 
 # endif // PUL_COR_H

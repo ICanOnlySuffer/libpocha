@@ -1,51 +1,51 @@
 # include "vec.h"
 
-nil vec_rsz (vec * vector, u32 capacity) FUN
+nil vec_rsz (vec * vector, u32 capacity) {
 	ptr * items = realloc (vector -> items, sizeof (ptr) * capacity);
-	IFF items THN
+	if (items) {
 		vector -> items = items;
 		vector -> capacity = capacity;
-	END
-END
+	}
+}
 
-nil vec_psh (vec * vector, ptr item) FUN
-	IFF vector -> capacity == vector -> size THN
+nil vec_psh (vec * vector, ptr item) {
+	if (vector -> capacity == vector -> size) {
 		vec_rsz (vector, vector -> capacity * 2);
-	END
+	}
 	vector -> items [vector -> size++] = item;
-END
+}
 
-nil vec_psh_arr (vec * vector, ptr items [], u16 size) FUN
-	IFF vector -> capacity < vector -> size + size THN
+nil vec_psh_arr (vec * vector, ptr items [], u16 size) {
+	if (vector -> capacity < vector -> size + size) {
 		vec_rsz (vector, vector -> size * 2);
-	END
-	WHL vector -> size < size DOS
+	}
+	while (vector -> size < size) {
 		vector -> items [vector -> size++] = *items++;
-	END
-END
+	}
+}
 
-nil vec_rmv_idx (vec * vector, u16 index) FUN
-	WHL index < vector -> size DOS
+nil vec_rmv_idx (vec * vector, u16 index) {
+	while (index < vector -> size) {
 		vector -> items [index] = vector -> items [index + 1];
 		index++;
-	END
+	}
 	vector -> items [--vector -> size] = NIL;
-END
+}
 
-u16 vec_idx (vec * vector, ptr pointer) FUN
+u16 vec_idx (vec * vector, ptr pointer) {
 	u16 i;
-	FOR i = 0; i < vector -> size; i++ DOS
-		IFF vector -> items [i] == pointer DOS
-			BRK;
-		END
-	END
-	RET i;
-END
+	for (i = 0; i < vector -> size; i++) {
+		if (vector -> items [i] == pointer) {
+			break;
+		}
+	}
+	return i;
+}
 
-nil vec_clr (vec * vector) FUN
-	FOR u32 i = 0; i < vector -> size; i++ DOS
+nil vec_clr (vec * vector) {
+	for (u32 i = 0; i < vector -> size; i++) {
 		free (vector -> items [i]);
-	END
+	}
 	vector -> size = 0;
-END
+}
 

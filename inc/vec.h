@@ -10,45 +10,30 @@ typedef struct {
 	u32 capacity;
 	u16 size;
 } vec;
+typedef s32 (* fun_compare) (const nil *, const nil *);
 
-EXT nil vec_rsz (vec * vector, u32 capacity);
-EXT nil vec_psh (vec * vector, ptr item);
-EXT nil vec_psh_arr (vec * vector, ptr items [], u16 size);
-EXT nil vec_rmv_idx (vec * vector, u16 index);
-EXT u16 vec_idx (vec * vector, ptr pointer);
-EXT nil vec_clr (vec * vector);
-STC INL nil vec_rmv (vec * vector, ptr pointer) FUN
+extern nil vec_rsz (vec * vector, u32 capacity);
+extern nil vec_psh (vec * vector, ptr item);
+extern nil vec_psh_arr (vec * vector, ptr items [], u16 size);
+extern nil vec_rmv_idx (vec * vector, u16 index);
+extern u16 vec_idx (vec * vector, ptr pointer);
+extern nil vec_clr (vec * vector);
+stainl nil vec_rmv (vec * vector, ptr pointer) {
 	vec_rmv_idx (vector, vec_idx (vector, pointer));
-END
-STC INL vec * vec_new (u32 capacity) FUN
+}
+stainl nil vec_srt (vec * vector, fun_compare compare) {
+	qsort (vector -> items, vector -> size, sizeof (ptr), compare);
+}
+stainl vec * vec_new (u32 capacity) {
 	vec * vector = malloc (sizeof (vector));
 	vector -> items = malloc (sizeof (ptr) * capacity);
 	vector -> capacity = capacity;
 	vector -> size = 0;
-	RET vector;
-END
-
-# define VEC_NEW(capacity_) \
-	(vec) { \
-		.items = malloc (sizeof (ptr) * capacity_), \
-		.capacity = capacity_, \
-		.size = 0 \
-	}
-
-# define VEC_SRT(vector_, compare_) \
-	qsort ( \
-		(vector_) -> items, \
-		(vector_) -> size, \
-		sizeof (ptr), \
-		compare_ \
-	)
-
-# define VEC_LST(vector_) \
-	vector_ -> items [vector_ -> size - 1]
-
-# define VEC_DEL(vector_) \
-	vec_clr (vector_); \
-	free (vector_)
+	return vector;
+}
+stainl vec VEC (u32 capacity) {
+	return (vec) {malloc (sizeof (ptr) * capacity), capacity, 0};
+}
 
 # endif // PUL_VEC_H
 
