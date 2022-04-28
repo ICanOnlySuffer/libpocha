@@ -50,8 +50,8 @@ C_FLAGS = -Iinc/ -O3
 	mkdir -p $@
 
 makedirs:
-	mkdir -p $(DIR_INSTALL_INC)
-	mkdir -p $(DIR_INSTALL_LIB)
+	mkdir -p $(DIR_INSTALL_INC)/pul
+	mkdir -p $(DIR_INSTALL_LIB)/pul
 	mkdir -p $(DIR_INSTALL_BIN)
 
 ifeq ($(ARCH), x86_64)
