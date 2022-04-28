@@ -1,4 +1,4 @@
-# pul (pocha's utility library)
+# Pocha's Utility Library
 
 C utility library for the average project.
 
