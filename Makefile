@@ -60,7 +60,7 @@ $(DIR_OBJ)/%.o: src/%.c
 install: uninstall all $(DIR_INSTALL_INC)/pul/ $(DIR_INSTALL_LIB)/pul/
 	cp -ru inc/* $(DIR_INSTALL_INC)/pul/
 	cp -ru $(DIR_OBJ)/* $(DIR_INSTALL_LIB)/pul/
-	cp -u bin/* $(DIR_INSTALL_BIN)/pul
+	cp -u bin/* $(DIR_INSTALL_BIN)
 
 uninstall:
 	rm -rf $(DIR_INSTALL_INC)/pul/
