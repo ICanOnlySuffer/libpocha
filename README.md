@@ -2,6 +2,8 @@
 
 C utility library for the average project.
 
+Compiles for GNU+Linux and Mingw
+
 ## Installation
 
 	# make install clean
@@ -12,7 +14,3 @@ Bug reports, suggestions and pull request are welcome!
 
 Try to keep each file under 100 lines.
 
-## Licence
-
-This project is available as open source under terms of the
-[MIT Licence](https://opensource.org/licenses/MIT).

@@ -1,21 +1,24 @@
 
 NAME = "Pocha's utility library"
 VERSION = "v0.4.0"
-OS := all
-OSES = gnu+linux windows
+PLATFORM := all
+PLATFORMES = gnu+linux mingw
 
-ifeq ($(OS), all)
+ifeq ($(PLATFORM), all)
 all:
-	make all OS=gnu+linux
-	make all OS=windows
+	make all PLATFORM=gnu+linux
+	make all PLATFORM=mingw
 install:
-	make install OS=gnu+linux
-	make install OS=windows
+	make install PLATFORM=gnu+linux
+	make install PLATFORM=mingw
 uninstall:
-	make uninstall OS=gnu+linux
-	make uninstall OS=windows
+	make uninstall PLATFORM=gnu+linux
+	make uninstall PLATFORM=mingw
+clean:
+	make clean PLATFORM=gnu+linux
+	make clean PLATFORM=mingw
 else
-ifeq ($(OS), gnu+linux)
+ifeq ($(PLATFORM), gnu+linux)
 	DIR_INC = /usr/include
 	DIR_LIB = /usr/lib
 	DIR_BIN = /usr/bin
@@ -24,17 +27,17 @@ ifeq ($(OS), gnu+linux)
 	A_FLAGS = -Iinc/ -O3 -f elf64
 	ARCH = $(shell uname -m)
 else
-ifeq ($(OS), windows)
+ifeq ($(PLATFORM), mingw)
 	DIR_INC = /usr/x86_64-w64-mingw32/include
 	DIR_LIB = /usr/x86_64-w64-mingw32/lib
 	DIR_BIN = /usr/x86_64-w64-mingw32/bin
 	CC := x86_64-w64-mingw32-cc
 else
-all: $(error operating system `$(OS)` not supported)
+all: $(error platform `$(PLATFORM)` not supported)
 endif
 endif
 
-DIR_OBJ = obj-$(OS)
+DIR_OBJ = obj-$(PLATFORM)
 SRC = $(shell find src -name '*.c') 
 OBJ = $(SRC:src/%.c=$(DIR_OBJ)/%.o)
 
@@ -49,10 +52,9 @@ C_FLAGS = -Iinc/ -O3
 %/:
 	mkdir -p $@
 
-makedirs:
-	mkdir -p $(DIR_INSTALL_INC)/pul
-	mkdir -p $(DIR_INSTALL_LIB)/pul
-	mkdir -p $(DIR_INSTALL_BIN)
+DIRS = $(DIR_INSTALL_INC)/pul/ \
+       $(DIR_INSTALL_LIB)/pul/ \
+       $(DIR_INSTALL_BIN)/
 
 ifeq ($(ARCH), x86_64)
 $(DIR_OBJ)/%.o: src/%.asm
@@ -62,17 +64,18 @@ endif
 $(DIR_OBJ)/%.o: src/%.c
 	$(CC) -c $< -o $@ $(C_FLAGS)
 
-install: all makedirs
-	cp -ru inc/* $(DIR_INSTALL_INC)/pul/
-	cp -ru $(DIR_OBJ)/* $(DIR_INSTALL_LIB)/pul/
-	cp -u bin/pul $(DIR_INSTALL_BIN)
+install: all $(DIRS)
+	cp -r inc/* $(DIR_INSTALL_INC)/pul/
+	cp -r $(DIR_OBJ)/* $(DIR_INSTALL_LIB)/pul/
+	cp bin/pul $(DIR_INSTALL_BIN)
 
 uninstall:
 	rm -rf $(DIR_INSTALL_INC)/pul/
 	rm -rf $(DIR_INSTALL_LIB)/pul/
 	rm -rf $(DIR_INSTALL_BIN)/pul
-endif
 
 clean:
-	rm -rf obj-*
+	rm -rf $(DIR_OBJ)
+
+endif
 
