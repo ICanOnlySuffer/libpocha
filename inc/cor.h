@@ -43,7 +43,7 @@ typedef char * str;
 // etc
 
 # define stainl static inline
-# define ARR_LEN(array_) sizeof (array_) / sizeof (*array_)
+# define ARR_LEN(array_) (sizeof (array_) / sizeof (*array_))
 
 # endif // PUL_COR_H
 
