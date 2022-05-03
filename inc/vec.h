@@ -21,6 +21,15 @@ extern nil vec_clr (vec * vector);
 stainl nil vec_rmv (vec * vector, ptr pointer) {
 	vec_rmv_idx (vector, vec_idx (vector, pointer));
 }
+stainl u08 vec_inc (vec * vector, ptr pointer) {
+	return vec_idx (vector, pointer) != vector -> size;
+}
+stainl ptr vec_lst (vec * vector) {
+	return vector -> items [vector -> size - 1];
+}
+stainl ptr vec_pop (vec * vector) {
+	return vector -> items [--(vector -> size)];
+}
 stainl nil vec_srt (vec * vector, fun_compare compare) {
 	qsort (vector -> items, vector -> size, sizeof (ptr), compare);
 }

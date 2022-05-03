@@ -30,18 +30,18 @@ stainl nil new_lne_err () {
 	put_chr_err ('\n');
 }
 
-# define FIL_PUT_ARR(file_, ...) \
+# define FIL_PUT(file_, ...) \
 	fil_put_arr ( \
 		file_, \
 		sizeof ((str []) {__VA_ARGS__}) / sizeof (str), \
 		(str []) {__VA_ARGS__} \
 	)
 
-# define PUT_ARR(...) \
-	FIL_PUT_ARR (STD_OUT, __VA_ARGS__)
+# define PUT(...) \
+	FIL_PUT (STD_OUT, __VA_ARGS__)
 
-# define PUT_ERR_ARR(...) \
-	FIL_PUT_ARR (STD_ERR, __VA_ARGS__)
+# define PUT_ERR(...) \
+	FIL_PUT (STD_ERR, __VA_ARGS__)
 
 # endif // PUL_PUT_H
 

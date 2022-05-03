@@ -1,14 +1,8 @@
 
-%ifndef PUTILS_COR_INC
-%define PUTILS_COR_INC
+%ifndef PUL_COR_INC
+%define PUL_COR_INC
 
-STD_INN equ 0		  ; con STD_INN 0
-STD_OUT equ 1		  ; con STD_OUT 1
-STD_ERR equ 2		  ; con STD_ERR 2
-
-SYS_RED equ 0		  ; con SYS_RED 0
-SYS_WRT equ 1		  ; con SYS_WRT 1
-SYS_QUT equ 60		  ; con SUS_QUT 60
+SYS_QUT equ 60
 
 %define l_0 rax
 %define l_1 rdi
@@ -53,44 +47,41 @@ SYS_QUT equ 60		  ; con SUS_QUT 60
 %define psh push
 %define cll call
 %define mvz movzx
-
 %define jeq je
 %define tst test
 
 %define sys_cll syscall
 
-%macro qut 1		  ; mac qut u08:cde dos
-	mov rax, SYS_QUT  ; 	u64 sys <-- SYS_QUT
-	mov dil, %1 	  ; 	u08 __0 <-- cde
-	syscall			  ; 	SYS_QUT.cll __0
-	%endmacro		  ; 	end
+%macro qut 1
+	mov l_0, SYS_QUT
+	mov b_1, %1
+	syscall
+	%endmacro
 
-%macro psh_all 0	  ; mac psh_all nil dos
-	psh rax
-	psh rdi
-	psh rsi
-	psh rdx
-	psh rcx
-	psh r8
-	psh r9
-	%endmacro		  ; 	end
+%macro psh_all 0
+	psh l_0
+	psh l_1
+	psh l_2
+	psh l_3
+	psh l_4
+	psh l_5
+	psh l_6
+	%endmacro
 
-%macro pop_all 0	  ; mac pop_all nil dos
-	pop r9
-	pop r8
-	pop rcx
-	pop rdx
-	pop rsi
-	pop rdi
-	pop rax
-	%endmacro		  ; 	end
-
-%endif ; PUTILS_COR_INC
+%macro pop_all 0
+	pop l_6
+	pop l_5
+	pop l_4
+	pop l_3
+	pop l_2
+	pop l_1
+	pop l_0
+	%endmacro
 
 ; registers
 ; 64bit | 32bit | 16bit | 8hbit | 8lbit | keep | description
 ; rax   | eax   | ax    | ah    | al    | no   | returned
-; rcx   | ecx   | cx    | ch    | cl    | no   | parameter #4 (cmp out)
+; rcx   | ecx   | cx    | ch    | cl    | no   | parameter #4 (cmp)
 ; rdx   | edx   | dx    | dh    | dl    | no   | parameter #3
 ; rbx   | ebx   | bx    | bh    | bl    | yes  | -
 ; rsp   | esp   | sp    | n/a   | spl   | yes  | stack pointer
@@ -100,8 +91,9 @@ SYS_QUT equ 60		  ; con SUS_QUT 60
 ; r8    | r8d   | r8w   | n/a   | r8b   | no   | parameter #5
 ; r9    | r9d   | r9w   | n/a   | r9b   | no   | parameter #6
 ; r10   | r10d  | r10w  | n/a   | r10b  | no   | parameter #7
-
 ; parameter registers
 ; fun cll: rdi, rsi, rdx, rcx, r8, r9
 ; sys cll: rdi, rsi, rdx, r10, r8, r9
+
+%endif ; PUL_COR_INC
 
