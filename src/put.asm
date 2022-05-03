@@ -1,4 +1,15 @@
-%include "cor.inc"
+%include "str.inc"
+
+global fil_put
+global fil_put_chr
+global fil_put_arr
+
+STD_INN equ 0
+STD_OUT equ 1
+STD_ERR equ 2
+
+SYS_RED equ 0
+SYS_WRT equ 1
 
 ; nil ; u64:fil u64:str ;
 fil_put:
@@ -39,10 +50,4 @@ fil_put_arr:
 		cmp s_6, 0
 		jne fil_put_arr_loop
 	ret
-
-section .text
-	extern str_len
-	global fil_put
-	global fil_put_chr
-	global fil_put_arr
 

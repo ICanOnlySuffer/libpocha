@@ -1,5 +1,15 @@
 %include "cor.inc"
 
+global str_end
+global str_len
+global str_chp
+global str_rvs
+global str_cmp
+global str_frm_u64
+global str_cpy
+global str_cpy_arr
+global str_frm_fmt
+
 ; u64 ; u64:str ;
 str_end:
 	mov l_0, l_1
@@ -36,8 +46,8 @@ str_cmp:
 		tst b_0, b_0
 		jne str_cmp_loop
 	str_cmp_end:
-	movsx dx, byte [rsi]
-	sub ax, dx
+	movsx s_3, byte [l_2]
+	sub s_0, s_3
 	ret
 
 ; nil ; u64:str ;
@@ -58,48 +68,89 @@ str_rvs:
 	str_rvs_end:
 	ret
 
-; nil ; u64:bff u16:len u64:arr ;
-str_cpy:
-	mov r8, [rdx]
-	str_cpy_loop:
-		mov r9b, [r8]
-		cmp r9b, 0
-		jeq str_cpy_end
-		mov [rdi], r9b
-		inc rdi
-		inc r8
-		jmp str_cpy_loop
-	str_cpy_end:
-	add rdx, 8
-	dec sil
-	cmp sil, 0
-	jnz str_cpy
-	mov [rdi], byte 0
-	ret
-
 ; nil ; str:bff u64:num ;
 str_frm_u64:
-	psh rdi
-	mov rax, rsi
-	u64_tos_loop:
-		mov rdx, 0
-		mov rsi, 10
-		div rsi
-		add dl, 48
-		mov [rdi], dl
-		inc rdi
-		cmp rax, 0
-		jne u64_tos_loop
-	mov [rdi], byte 0
-	pop rdi
+	psh l_1
+	mov l_0, l_2
+	str_frm_u64_loop:
+		mov l_3, 0
+		mov l_2, 10
+		div l_2
+		add b_3, 48
+		mov [l_1], b_3
+		inc l_1
+		cmp l_0, 0
+		jne str_frm_u64_loop
+	mov [l_1], byte 0
+	pop l_1
 	cll str_rvs
 	ret
 
-section .text
-	global str_len
-	global str_chp
-	global str_rvs
-	global str_cmp
-	global str_cpy
-	global str_frm_u64
+; nil ; u64:dst u64:str ;
+str_cpy:
+	mov b_0, [l_2]
+	mov [l_1], b_0
+	inc l_1
+	inc l_2
+	cmp b_0, byte 0
+	jne str_cpy
+	mov [l_1], byte 0
+	ret
+
+; nil ; u64:dst u08:len u64:arr ;
+str_cpy_arr:
+	mov b_4, b_2
+	str_cpy_arr_loop:
+		mov l_2, [l_3]
+		cll str_cpy
+		dec l_1
+		add l_3, 8
+		dec b_4
+		cmp b_4, 0
+		jne str_cpy_arr_loop
+	ret
+
+; nil ; u64:dst u64:fmt u64:arr ;
+str_frm_fmt:
+	dec l_2
+	str_frm_fmt_loop:
+		inc l_2
+		cmp [l_2], byte 0
+		jeq str_frm_fmt_end
+		cmp [l_2], byte '%'
+		jne str_frm_fmt_else
+		inc l_2
+		cmp [l_2], byte 'u'
+		jeq str_frm_fmt_u
+		cmp [l_2], byte 's'
+		jeq str_frm_fmt_s
+		jmp str_frm_fmt_else
+		str_frm_fmt_u:
+			psh l_3
+			psh l_2
+			mov l_2, [l_3]
+			mov l_2, [l_2]
+			cll str_frm_u64
+			cll str_end
+			mov l_1, l_0
+			pop l_2
+			pop l_3
+			add l_3, 8
+			jmp str_frm_fmt_loop
+		str_frm_fmt_s:
+			psh l_2
+			mov l_2, [l_3]
+			cll str_cpy
+			add l_3, 8
+			pop l_2
+			dec l_1
+			jmp str_frm_fmt_loop
+		str_frm_fmt_else:
+			mov b_0, [l_2]
+			mov [l_1], b_0
+			inc l_1
+			jmp str_frm_fmt_loop
+	str_frm_fmt_end:
+		mov [l_1], byte 0
+	ret
 

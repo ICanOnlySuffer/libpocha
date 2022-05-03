@@ -29,26 +29,62 @@ s16 str_cmp (str string_1, str string_2) {
 	return (s16) *string_1 - (s16) *string_2;
 }
 
-nil str_cpy (str buffer, u16 n_strings, str strings []) {
+nil str_cpy (str destine, str string) {
 	do {
-		while (**strings) {
-			*buffer = **strings;
-			++*strings;
-			++buffer;
-		}
-		--n_strings;
-		++strings;
-	} while (n_strings);
-	*buffer = 0;
+		*destine++ = *string;
+	} while (*string++);
+	*destine = 0;
 }
 
-nil str_frm_u64 (str buffer, u64 number) {
-	str start = buffer;
+nil str_cpy_arr (str destine, u08 n_strings, str strings []) {
 	do {
-		*buffer = 48 + (number % 10);
-		++buffer;
+		do {
+			*destine++ = **strings;
+		} while (*(*strings)++);
+		--destine;
+		++strings;
+	} while (--n_strings);
+	*destine = 0;
+}
+
+nil str_frm_u64 (str destine, u64 number) {
+	str start = destine;
+	do {
+		*destine = 48 + (number % 10);
+		++destine;
 	} while (number /= 10);
-	*buffer = 0;
+	*destine = 0;
 	str_rvs (start);
 }
+
+nil str_frm_fmt (str destine, str format, ptr pointers []) {
+	chr buffer [21];
+	u16 index = 0;
+	u16 size;
+	do {
+		if (*format == '%') {
+			switch (*++format) {	
+			case 'u':
+				str_frm_u64 (buffer, *(u64 *) *pointers++);
+				size = str_len (buffer);
+				str_cpy (destine + index, buffer);
+				index += size;
+				break;
+			case 's':
+				size = str_len ((str) *pointers);
+				str_cpy (destine + index, (str) *pointers++);
+				index += size;
+				break;
+			case '%':
+				destine [index++] = '%';
+				break;
+			}
+		} else {
+			destine [index++] = *format;
+		}
+	} while (*++format);
+	destine [index] = 0;
+}
+
+
 

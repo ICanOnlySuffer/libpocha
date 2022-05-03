@@ -1,4 +1,7 @@
-%include "cor.inc"
+%include "str.inc"
+
+global u64_pow_u64
+global u64_frm_str
 
 ; u64 ; u64:num u64:pow ;
 u64_pow_u64:
@@ -37,9 +40,4 @@ u64_frm_str:
 		jne u64_frm_str_loop
 	mov l_0, l_5
 	ret
-
-section .text:
-	extern str_len
-	global u64_pow_u64
-	global u64_frm_str
 

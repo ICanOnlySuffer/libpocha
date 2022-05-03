@@ -1,8 +1,7 @@
 
 NAME = "Pocha's utility library"
-VERSION = "v0.4.0"
 PLATFORM := all
-PLATFORMES = gnu+linux mingw
+PLATFORMS = gnu+linux mingw
 
 ifeq ($(PLATFORM), all)
 all:
@@ -64,7 +63,7 @@ endif
 $(DIR_OBJ)/%.o: src/%.c
 	$(CC) -c $< -o $@ $(C_FLAGS)
 
-install: all $(DIRS)
+install: uninstall all $(DIRS)
 	cp -r inc/* $(DIR_INSTALL_INC)/pul/
 	cp -r $(DIR_OBJ)/* $(DIR_INSTALL_LIB)/pul/
 	cp bin/pul $(DIR_INSTALL_BIN)
