@@ -129,7 +129,6 @@ str_frm_fmt:
 			psh l_3
 			psh l_2
 			mov l_2, [l_3]
-			mov l_2, [l_2]
 			cll str_frm_u64
 			cll str_end
 			mov l_1, l_0

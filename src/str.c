@@ -1,4 +1,4 @@
-# include "str.h"
+# include "../inc/str.h"
 
 u64 str_len (str string) {
 	u64 len = -1;
@@ -57,7 +57,7 @@ nil str_frm_u64 (str destine, u64 number) {
 	str_rvs (start);
 }
 
-nil str_frm_fmt (str destine, str format, ptr pointers []) {
+nil str_frm_fmt (str destine, str format, u64 values []) {
 	chr buffer [21];
 	u16 index = 0;
 	u16 size;
@@ -65,14 +65,14 @@ nil str_frm_fmt (str destine, str format, ptr pointers []) {
 		if (*format == '%') {
 			switch (*++format) {	
 			case 'u':
-				str_frm_u64 (buffer, *(u64 *) *pointers++);
+				str_frm_u64 (buffer, *values++);
 				size = str_len (buffer);
 				str_cpy (destine + index, buffer);
 				index += size;
 				break;
 			case 's':
-				size = str_len ((str) *pointers);
-				str_cpy (destine + index, (str) *pointers++);
+				size = str_len ((str) *values);
+				str_cpy (destine + index, (str) *values++);
 				index += size;
 				break;
 			case '%':
