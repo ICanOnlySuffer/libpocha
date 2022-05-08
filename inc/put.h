@@ -8,25 +8,25 @@
 # define STD_OUT 1
 # define STD_ERR 2
 
-extern nil fil_put (u64 file, str string);
-extern nil fil_put_chr (u64 file, chr character);
-extern nil fil_put_arr (u64 file, u16 n_strings, str strings []);
-stainl nil put (str string) {
+ext nil fil_put (u64 file, str string);
+ext nil fil_put_chr (u64 file, chr character);
+ext nil fil_put_arr (u64 file, u16 n_strings, str strings []);
+inl nil put (str string) {
 	fil_put (STD_OUT, string);
 }
-stainl nil put_err (str string) {
+inl nil put_err (str string) {
 	fil_put (STD_ERR, string);
 }
-stainl nil put_chr (chr character) {
+inl nil put_chr (chr character) {
 	fil_put_chr (STD_OUT, character);
 }
-stainl nil put_chr_err (chr character) {
+inl nil put_chr_err (chr character) {
 	fil_put_chr (STD_ERR, character);
 }
-stainl nil new_lne () {
+inl nil new_lne () {
 	put_chr ('\n');
 }
-stainl nil new_lne_err () {
+inl nil new_lne_err () {
 	put_chr_err ('\n');
 }
 

@@ -23,6 +23,7 @@
 
 typedef void nil;
 typedef void * ptr;
+typedef const void * con_ptr;
 
 typedef int8_t  s08;
 typedef int16_t s16;
@@ -34,15 +35,16 @@ typedef uint16_t u16;
 typedef uint32_t u32;
 typedef uint64_t u64;
 
-typedef float flt;
-typedef double dbl;
+typedef float f32;
+typedef double f64;
 
 typedef char chr;
 typedef char * str;
 
 // etc
 
-# define stainl static inline
+# define inl static inline
+# define ext extern
 # define ARR_LEN(array_) (sizeof ((array_)) / sizeof (*(array_)))
 
 # endif // PUL_COR_H
