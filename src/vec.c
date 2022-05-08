@@ -1,10 +1,10 @@
-# include "vec.h"
+# include "../inc/vec.h"
 
-nil vec_rsz (vec * vector, u32 capacity) {
+nil vec_rsz (vec * vector, u16 capacity) {
 	ptr * items = realloc (vector -> items, sizeof (ptr) * capacity);
 	if (items) {
-		vector -> items = items;
 		vector -> capacity = capacity;
+		vector -> items = items;
 	}
 }
 
@@ -15,11 +15,11 @@ nil vec_psh (vec * vector, ptr item) {
 	vector -> items [vector -> size++] = item;
 }
 
-nil vec_psh_arr (vec * vector, ptr items [], u16 size) {
-	if (vector -> capacity < vector -> size + size) {
+nil vec_psh_arr (vec * vector, u08 n_items, ptr items []) {
+	if (vector -> capacity < vector -> size + n_items) {
 		vec_rsz (vector, vector -> size * 2);
 	}
-	while (vector -> size < size) {
+	while (vector -> size < n_items) {
 		vector -> items [vector -> size++] = *items++;
 	}
 }
@@ -42,10 +42,17 @@ u16 vec_idx (vec * vector, ptr pointer) {
 	return i;
 }
 
-nil vec_clr (vec * vector) {
-	for (u32 i = 0; i < vector -> size; i++) {
-		free (vector -> items [i]);
+nil vec_for_all (vec * vector, nil (* function) (ptr)) {
+	for (u16 i = 0; i < vector -> size; i++) {
+		function (vector -> items [i]);
 	}
+}
+
+vec * vec_new (u16 capacity) {
+	vec * vector = malloc (sizeof (vec));
+	vector -> items = malloc (sizeof (ptr) * capacity);
+	vector -> capacity = capacity;
 	vector -> size = 0;
+	return vector;
 }
 
