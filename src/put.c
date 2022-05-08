@@ -1,5 +1,5 @@
+# include "../inc/put.h"
 # include <unistd.h>
-# include "put.h"
 
 nil fil_put (u64 file, str string) {
 	write (file, string, str_len (string));

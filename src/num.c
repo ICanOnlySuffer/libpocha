@@ -1,4 +1,4 @@
-# include "num.h"
+# include "../inc/num.h"
 
 u64 u64_pow_u64 (u64 number, u64 power) {
 	u64 out = 1;

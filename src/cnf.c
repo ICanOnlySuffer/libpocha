@@ -1,4 +1,4 @@
-# include "cnf.h"
+# include "../inc/cnf.h"
 # define READING_VALUE 0
 # define READING_KEY 1
 # define NEW_LINE 2
