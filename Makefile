@@ -3,7 +3,7 @@ VERSION = "v0.5.0"
 PLATFORM := gnu+linux
 
 ifeq ($(PLATFORM), gnu+linux)
-	PREFIX := $(if $(PREFIX), $(PREFIX), /usr)
+	PREFIX := $(if $(PREFIX),$(PREFIX),/usr)
 	INC_DIR = $(PREFIX)/include
 	LIB_DIR = $(PREFIX)/lib
 	BIN_DIR = $(PREFIX)/bin
