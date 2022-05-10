@@ -29,14 +29,15 @@ s16 str_cmp (str string_1, str string_2) {
 	return (s16) *string_1 - (s16) *string_2;
 }
 
-nil str_cpy (str destine, str string) {
+str str_cpy (str destine, str string) {
 	do {
 		*destine++ = *string;
 	} while (*string++);
 	*destine = 0;
+	return destine;
 }
 
-nil str_cpy_arr (str destine, u08 n_strings, str strings []) {
+str str_cpy_arr (str destine, u08 n_strings, str strings []) {
 	do {
 		do {
 			*destine++ = **strings;
@@ -45,6 +46,7 @@ nil str_cpy_arr (str destine, u08 n_strings, str strings []) {
 		++strings;
 	} while (--n_strings);
 	*destine = 0;
+	return destine;
 }
 
 nil str_frm_u64 (str destine, u64 number) {
@@ -85,6 +87,4 @@ nil str_frm_fmt (str destine, str format, u64 values []) {
 	} while (*++format);
 	destine [index] = 0;
 }
-
-
 

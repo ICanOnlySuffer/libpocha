@@ -1,4 +1,5 @@
 
+VERSION = "v0.5.0"
 PLATFORM := gnu+linux
 
 ifeq ($(PLATFORM), gnu+linux)
@@ -6,7 +7,6 @@ ifeq ($(PLATFORM), gnu+linux)
 	INC_DIR = $(PREFIX)/include
 	LIB_DIR = $(PREFIX)/lib
 	BIN_DIR = $(PREFIX)/bin
-	CC := cc
 else
 ifeq ($(PLATFORM), mingw)
 	PREFIX := /usr/x86_64-w64-mingw32
@@ -23,13 +23,13 @@ OBJ_DIR = obj-$(PLATFORM)
 SRC = $(shell find src -name '*.c') 
 OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
 
-all: $(OBJ_DIR)/ $(OBJ)
+all: bin/pul $(OBJ_DIR)/ $(OBJ)
 
 INSTALL_INC_DIR = $(INSTALL_DIR)$(INC_DIR)
 INSTALL_LIB_DIR = $(INSTALL_DIR)$(LIB_DIR)
 INSTALL_BIN_DIR = $(INSTALL_DIR)$(BIN_DIR)
 
-C_FLAGS = -O3
+C_FLAGS = -O3 -Wall
 
 %/:
 	mkdir -p $@
@@ -41,11 +41,21 @@ DIRS = $(INSTALL_INC_DIR)/pul/ \
 ifeq ($(PLATFORM), gnu+linux)
 ifeq ($(shell uname -m), x86_64)
 	AC = nasm
-	A_FLAGS = -O3 -f elf64 -Iinc/
+	A_FLAGS = -O3 -Wall -f elf64 -Iinc/
 $(OBJ_DIR)/%.o: src/%.asm
 	$(AC) $< -o $@ $(A_FLAGS)
 endif
 endif
+
+bin/pul: src/pul.zsh
+	printf "`cat $<`" $(VERSION) > $@
+	chmod +x $@
+
+#echo "\
+#,-, , , ,   Pocha's Utility Library v0.5.0
+#| | | | |
+#|-´ | | |   Copyright (c) 2022 Piero Estéfano Rojas Effio
+#'   \`-´ \`-- GNU General Public License v3.0"
 
 $(OBJ_DIR)/%.o: src/%.c
 	$(CC) -c $< -o $@ $(C_FLAGS)
@@ -61,5 +71,5 @@ uninstall:
 	rm -rf $(INSTALL_BIN_DIR)/pul
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf bin/pul $(OBJ_DIR)
 

@@ -86,7 +86,7 @@ str_frm_u64:
 	cll str_rvs
 	ret
 
-; nil ; u64:dst u64:str ;
+; u64 ; u64:dst u64:str ;
 str_cpy:
 	mov b_0, [l_2]
 	mov [l_1], b_0
@@ -95,9 +95,10 @@ str_cpy:
 	cmp b_0, byte 0
 	jne str_cpy
 	mov [l_1], byte 0
+	mov l_0, l_1
 	ret
 
-; nil ; u64:dst u08:len u64:arr ;
+; u64 ; u64:dst u08:len u64:arr ;
 str_cpy_arr:
 	mov b_4, b_2
 	str_cpy_arr_loop:
@@ -108,6 +109,7 @@ str_cpy_arr:
 		dec b_4
 		cmp b_4, 0
 		jne str_cpy_arr_loop
+	mov l_0, l_1
 	ret
 
 ; nil ; u64:dst u64:fmt u64:arr ;

@@ -12,5 +12,3 @@ Compiles for GNU+Linux and Mingw
 
 Bug reports, suggestions and pull request are welcome!
 
-Try to keep each file under 100 lines.
-

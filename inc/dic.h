@@ -10,8 +10,8 @@ typedef struct {
 	ptr value;
 } key_val;
 
-ext u64 key_frm_str (str string);
 ext ptr dic_get (vec * dictionary, u64 key);
+ext ptr dic_get_wth_str (vec * dictionary, str key);
 ext key_val * key_val_new (u64 key, ptr value);
 inl key_val KEY_VAL (u64 key, ptr value) {
 	return (key_val) {key, value};
