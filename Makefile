@@ -47,7 +47,7 @@ $(OBJ_DIR)/%.o: src/%.asm
 endif
 endif
 
-bin/pul: src/pul.zsh
+bin/pul: src/pul.zsh bin/
 	printf "`cat $<`" $(VERSION) > $@
 	chmod +x $@
 
@@ -71,5 +71,5 @@ uninstall:
 	rm -rf $(INSTALL_BIN_DIR)/pul
 
 clean:
-	rm -rf bin/pul $(OBJ_DIR)
+	rm -rf bin/ $(OBJ_DIR)
 
