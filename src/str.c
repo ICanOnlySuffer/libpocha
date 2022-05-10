@@ -10,7 +10,7 @@ u64 str_len (str string) {
 }
 
 nil str_chp (str string) {
-	string [str_len (string)] = 0;
+	string [str_len (string) - 1] = 0;
 }
 
 nil str_rvs (str string) {
