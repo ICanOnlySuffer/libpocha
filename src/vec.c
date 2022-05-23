@@ -1,4 +1,4 @@
-# include "../inc/num.h"
+# include "../inc/u64.h"
 # include "../inc/vec.h"
 
 // vector.resize capacity

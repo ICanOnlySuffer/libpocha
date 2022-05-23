@@ -23,7 +23,6 @@
 
 typedef void nil;
 typedef void * ptr;
-typedef const void * con_ptr;
 
 typedef int8_t  s08;
 typedef int16_t s16;
@@ -41,11 +40,16 @@ typedef double f64;
 typedef char chr;
 typedef char * str;
 
+typedef nil (* prc) (ptr);
+
 // etc
 
 # define inl static inline
 # define ext extern
-# define ARR_LEN(array_) (sizeof ((array_)) / sizeof (*(array_)))
+# define ret return
+
+// use: ARR_LEN ((str []) {"hola", "que", "tal?"}) => 3
+# define ARR_LEN(...) (sizeof __VA_ARGS__ / sizeof *__VA_ARGS__)
 
 # endif // PUL_COR_H
 

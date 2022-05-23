@@ -33,7 +33,7 @@ inl nil new_lne_err () {
 # define FIL_PUT(file_, ...) \
 	fil_put_arr ( \
 		file_, \
-		sizeof ((str []) {__VA_ARGS__}) / sizeof (str), \
+		ARR_LEN ((str []) {__VA_ARGS__}), \
 		(str []) {__VA_ARGS__} \
 	)
 

@@ -1,4 +1,6 @@
 # include "../inc/cnf.h"
+# include <stdio.h>
+
 # define READING_VALUE 0
 # define READING_KEY 1
 # define NEW_LINE 2
@@ -8,10 +10,10 @@
 vec cnf_get (str path, u16 size) {
 	FILE * file = fopen (path, "r");
 	if (not file) {
-		return VEC (0);
+		return vec_new (0);
 	}
 	
-	vec dictionary = VEC (32);
+	vec dictionary = vec_new (32);
 	str buffer = calloc (size, sizeof (chr));
 	u08 state = NEW_LINE;
 	
