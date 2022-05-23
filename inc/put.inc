@@ -1,11 +1,9 @@
 
-%ifndef PUL_PUT_INC
-%define PUL_PUT_INC
-%include "cor.inc"
+define STD_INN 0
+define STD_OUT 1
+define STD_ERR 2
 
-extern fil_put
-extern fil_put_chr
-extern fil_put_arr
-
-%endif ; PUL_PUT_INC
+extrn fil_put
+extrn fil_put_chr
+extrn fil_put_arr
 

@@ -1,17 +1,11 @@
 
-%ifndef PUL_STR_INC
-%define PUL_STR_INC
-%include "cor.inc"
-
-extern str_end
-extern str_len
-extern str_chp
-extern str_rvs
-extern str_cmp
-extern str_frm_u64
-extern str_cpy
-extern str_cpy_arr
-extern str_frm_fmt
-
-%endif ; PUL_STR_INC
+extrn str_end
+extrn str_len
+extrn str_chp
+extrn str_rvs
+extrn str_cmp
+extrn str_frm_u64
+extrn str_cpy
+extrn str_cpy_arr
+extrn str_frm_fmt
 
