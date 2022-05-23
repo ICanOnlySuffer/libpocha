@@ -1,4 +1,5 @@
-# include "../inc/num.h"
+# include "../inc/u64.h"
+# include "../inc/str.h"
 
 // number ** power
 u64 u64_pow_u64 (u64 number, u64 power) {
@@ -6,6 +7,7 @@ u64 u64_pow_u64 (u64 number, u64 power) {
 	while (power--) {
 		out *= number;
 	}
+	ret out;
 }
 
 // number.to_s
