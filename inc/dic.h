@@ -5,19 +5,27 @@
 # include "vec.h"
 # include "str.h"
 
+/*
+NOTES:
+- remember to always do `vec_for_all (dictionary, free)`
+*/
+
 typedef struct {
 	u64 key;
 	ptr value;
 } key_val;
 
+ext u16 dic_idx (vec * dictionary, u64 key);
+ext u16 dic_str_idx (vec * dictionary, str key);
+
 ext ptr dic_get (vec * dictionary, u64 key);
-ext ptr dic_get_wth_str (vec * dictionary, str key);
-ext key_val * key_val_new (u64 key, ptr value);
-inl key_val KEY_VAL (u64 key, ptr value) {
-	return (key_val) {key, value};
-}
-inl nil dic_psh (vec * dictionary, u64 key, ptr value) {
-	vec_psh (dictionary, key_val_new (key, value));
+ext ptr dic_str_get (vec * dictionary, str key);
+
+ext u08 dic_psh (vec * dictionary, u64 key, ptr value);
+ext u08 dic_rmv (vec * dictionary, u64 key);
+
+inl u08 dic_inc (vec * dictionary, u64 key) {
+	ret dic_idx (dictionary, key) != dictionary -> size;
 }
 
 # endif // PUL_DIC_H
