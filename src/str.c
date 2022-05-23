@@ -1,24 +1,29 @@
 # include "../inc/str.h"
 
-u64 str_len (str string) {
-	u64 len = -1;
+str str_end (str string) {
 	--string;
 	do {
-		++len;
-	} while (*++string);
-	return len;
+		++string;
+	} while (*string);
+	ret string;
 }
 
-nil str_chp (str string) {
+u64 str_len (str string) {
+	ret str_end (string) - string;
+}
+
+str str_chp (str string) {
 	string [str_len (string) - 1] = 0;
+	ret string;
 }
 
-nil str_rvs (str string) {
+str str_rvs (str string) {
 	for (u64 i = 0, j = str_len (string) - 1; i < j; i++, j--) {
 		chr temp = string [i];
 		string [i] = string [j];
 		string [j] = temp;
 	}
+	ret string;
 }
 
 s16 str_cmp (str string_1, str string_2) {
@@ -26,7 +31,7 @@ s16 str_cmp (str string_1, str string_2) {
 		++string_1;
 		++string_2;
 	}
-	return (s16) *string_1 - (s16) *string_2;
+	ret (s16) *string_1 - (s16) *string_2;
 }
 
 str str_cpy (str destine, str string) {
@@ -34,7 +39,7 @@ str str_cpy (str destine, str string) {
 		*destine++ = *string;
 	} while (*string++);
 	*destine = 0;
-	return destine;
+	ret destine;
 }
 
 str str_cpy_arr (str destine, u08 n_strings, str strings []) {
@@ -46,45 +51,59 @@ str str_cpy_arr (str destine, u08 n_strings, str strings []) {
 		++strings;
 	} while (--n_strings);
 	*destine = 0;
-	return destine;
+	ret destine;
 }
 
-nil str_frm_u64 (str destine, u64 number) {
+str str_frm_u64 (str destine, u64 number) {
 	str start = destine;
 	do {
 		*destine = 48 + (number % 10);
 		++destine;
 	} while (number /= 10);
 	*destine = 0;
-	str_rvs (start);
+	ret str_rvs (start);
 }
 
-nil str_frm_fmt (str destine, str format, u64 values []) {
-	chr buffer [21];
-	u16 index = 0;
-	u16 size;
+str str_frm_hex (str destine, u64 number) {
+	str start = destine;
+	do {
+		u08 remainder = number % 16;
+		*destine = (remainder < 10 ? 48 : 87) + remainder;
+		++destine;
+	} while (number /= 16);
+	*destine++ = 'x';
+	*destine++ = '0';
+	*destine = 0;
+	ret str_rvs (start);
+}
+
+str str_frm_fmt (str destine, str format, u64 values []) {
+	str start = destine;
 	do {
 		if (*format == '%') {
-			switch (*++format) {	
+			switch (*++format) {
 			case 'u':
-				str_frm_u64 (buffer, *values++);
-				size = str_len (buffer);
-				str_cpy (destine + index, buffer);
-				index += size;
+				str_frm_u64 (destine, *values++);
+				destine = str_end (destine);
+				break;
+			case 'x':
+				str_frm_hex (destine, *values++);
+				destine = str_end (destine);
 				break;
 			case 's':
-				size = str_len ((str) *values);
-				str_cpy (destine + index, (str) *values++);
-				index += size;
+				str_cpy (destine, (str) *values++);
+				destine = str_end (destine);
 				break;
 			case '%':
-				destine [index++] = '%';
+				*destine++ = '%';
 				break;
 			}
 		} else {
-			destine [index++] = *format;
+			*destine++ = *format;
 		}
 	} while (*++format);
-	destine [index] = 0;
+	*destine = 0;
+	
+	ret start;
 }
 
