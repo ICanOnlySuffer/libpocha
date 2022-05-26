@@ -13,7 +13,7 @@ public str_cpy
 public str_cpy_arr
 public str_frm_fmt
 
-section '.text' executable
+section '.text' writable executable
 ; u64 ; u64:str ;
 str_end:
 	mov l_0, l_1

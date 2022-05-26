@@ -14,7 +14,7 @@ STD_ERR equ 2
 SYS_RED equ 0
 SYS_WRT equ 1
 
-section '.text' executable
+section '.text' writable executable
 ; nil ; u64:fil u64:str ;
 fil_put:
 	psh l_1

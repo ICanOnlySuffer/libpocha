@@ -6,7 +6,7 @@ include "../inc/str.inc"
 public u64_pow_u64
 public u64_frm_str
 
-section '.text' executable
+section '.text' writable executable
 
 ; u64 ; u64:num u64:pow ;
 u64_pow_u64:
@@ -23,7 +23,8 @@ u64_pow_u64:
 
 ; u64 ; u64:str ;
 u64_frm_str:
-	cll str_len
+	lea l_0, [str_len]
+	cll l_0
 	mov l_2, l_0
 	mov l_5, 0
 .loop:
