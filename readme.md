@@ -1,10 +1,15 @@
 # Pocha's Utility Library
 
-C utility library for the average project.
+C and FASM utility library for the average project.
 
 Compiles for GNU+Linux and Mingw
 
 ## Installation
+
+**dependencies:**
+- [FASM](https://flatassembler.net) (make on linux)
+
+**command:**
 
 	# make install clean
 
