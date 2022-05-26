@@ -10,6 +10,12 @@ Compiles for GNU+Linux and Mingw
 
 ## Usage
 
+compilation:
+
+	$ cc -lpul main.c
+
+### Examples
+
 **formatted output:**
 
 ```c
@@ -29,11 +35,9 @@ u08 main () {
 }
 ```
 
-	$ cc /usr/lib/pul/{str,put}.o main.c
 	string: 'hola', length: 4, pointer: 0x55a274c68006
 
 **vectors:**
-
 
 ```c
 # include <pul/vec.h>
@@ -50,7 +54,6 @@ u08 main () {
 }
 ```
 
-	$ cc /usr/lib/pul/{str,put,vec}.o main.c
 	name: 'pablo'
 	name: 'pedro'
 	name: 'juan'
