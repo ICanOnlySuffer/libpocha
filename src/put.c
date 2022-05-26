@@ -1,4 +1,5 @@
 # include "../inc/put.h"
+# undef ret
 # include <unistd.h>
 
 nil fil_put (u64 file, str string) {
