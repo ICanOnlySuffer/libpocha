@@ -7,6 +7,7 @@ Compiles for GNU+Linux and Mingw
 ## Installation
 
 **dependencies:**
+
 - [FASM](https://flatassembler.net) (make on linux)
 
 **command:**
@@ -15,7 +16,7 @@ Compiles for GNU+Linux and Mingw
 
 ## Usage
 
-compilation:
+**compilation:**
 
 	$ cc -lpul main.c
 
@@ -48,8 +49,8 @@ u08 main () {
 # include <pul/vec.h>
 # include <pul/put.h>
 
-nil print_name (str name) {
-	PUT ("name: '", name, "'\n");
+nil print_name (ptr name) {
+	PUT ("name: '", (str) name, "'\n");
 }
 
 u08 main () {
