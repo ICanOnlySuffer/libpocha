@@ -1,14 +1,16 @@
 # Pocha's Utility Library
 
-C and FASM utility library for the average project.
+C and FASM static utility library for the average project. Contains
+low level implementations of vectors and dictionaries, as well as
+procedures for output, strings, numbers and configuration files.
 
-Compiles for GNU+Linux and Mingw
+Compiles for GNU+Linux and Mingw.
 
 ## Installation
 
 **dependencies:**
 
-- [FASM](https://flatassembler.net) (make on linux)
+- [FASM](https://flatassembler.net) (make on Linux x86)
 
 **command:**
 
@@ -18,7 +20,7 @@ Compiles for GNU+Linux and Mingw
 
 **compilation:**
 
-	$ cc -lpul main.c
+	$ cc main.c -lpul
 
 ### Examples
 
@@ -55,14 +57,16 @@ nil print_name (ptr name) {
 
 u08 main () {
 	vec names = vec_new (2);
-	VEC_PSH (&names, "pablo", "pedro", "juan");
+	VEC_PSH (&names, "Juan", "Pablo", "Alberto", "María");
+	vec_srt (&names, compare_name);
 	vec_for_all (&names, print_name);
 }
 ```
 
-	name: 'pablo'
-	name: 'pedro'
-	name: 'juan'
+	name: 'Alberto'
+	name: 'Juan'
+	name: 'María'
+	name: 'Pablo'
 
 ## Contributing
 
