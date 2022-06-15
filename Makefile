@@ -1,6 +1,6 @@
 
 MAYOR = 0
-MINOR = 6
+MINOR = 7
 PATCH = 0
 
 PLATFORM := gnu+linux
@@ -9,13 +9,13 @@ ifeq ($(PLATFORM),gnu+linux)
 	PREFIX := $(if $(PREFIX),$(PREFIX),/usr)
 	INC_DIR = $(PREFIX)/include
 	LIB_DIR = $(PREFIX)/lib
-	LIB     = libpocha.a
+	TARGET  = libpocha.a
 else
 ifeq ($(PLATFORM),mingw)
 	PREFIX := /usr/x86_64-w64-mingw32
 	INC_DIR = $(PREFIX)/include
 	LIB_DIR = $(PREFIX)/lib
-	LIB     = libpocha.dll
+	TARGET  = libpocha.dll
 	CC     := x86_64-w64-mingw32-cc
 	AR     := x86_64-w64-mingw32-ar
 else
@@ -32,6 +32,8 @@ INSTALL_LIB_DIR = $(INSTALL_DIR)$(LIB_DIR)
 
 C_FLAGS = -O3 -Wall -pedantic
 
+all: inc/ver.h $(OBJ_DIR)/$(TARGET)
+
 %/:
 	mkdir -p $@
 
@@ -40,24 +42,25 @@ inc/ver.h: src/ver.c
 
 ifeq ($(PLATFORM)-$(shell uname -m),gnu+linux-x86_64)
 $(OBJ_DIR)/%.o: src/%.asm
+	@mkdir -p $(OBJ_DIR)/
 	fasm $< $@
 endif
 
 $(OBJ_DIR)/%.o: src/%.c
 	$(CC) -c $< -o $@ $(C_FLAGS)
 
-$(OBJ_DIR)/$(LIB): $(OBJ)
+$(OBJ_DIR)/$(TARGET): $(OBJ)
 	$(AR) rcs $@ $(OBJ_DIR)/*
 
-all: inc/ver.h $(OBJ_DIR)/ $(OBJ_DIR)/$(LIB)
-
-install: uninstall all $(INSTALL_INC_DIR)/pocha/ $(INSTALL_LIB_DIR)/
+install: uninstall all
+	@mkdir -p $(INSTALL_INC_DIR)/pocha/
+	@mkdir -p $(INSTALL_LIB_DIR)/
 	cp -r inc/* $(INSTALL_INC_DIR)/pocha/
-	cp -r $(OBJ_DIR)/$(LIB) $(INSTALL_LIB_DIR)/$(LIB)
+	cp -r $(OBJ_DIR)/$(TARGET) $(INSTALL_LIB_DIR)/$(TARGET)
 
 uninstall:
 	rm -rf $(INSTALL_INC_DIR)/pocha/
-	rm -rf $(INSTALL_LIB_DIR)/$(LIB)
+	rm -rf $(INSTALL_LIB_DIR)/$(TARGET)
 
 clean:
 	rm -rf inc/ver.h $(OBJ_DIR)/

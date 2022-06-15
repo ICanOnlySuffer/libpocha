@@ -1,4 +1,4 @@
-# LibPocha
+# libpocha
 
 C and FASM static utility library for the average project. Contains
 low level implementations of vectors and dictionaries, as well as

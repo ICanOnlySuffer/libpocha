@@ -1,6 +1,6 @@
 
-# ifndef PUL_VEC_H
-# define PUL_VEC_H
+# ifndef LIBPOCHA_VEC_H
+# define LIBPOCHA_VEC_H
 
 # include <stdlib.h>
 # include "cor.h"
@@ -65,5 +65,5 @@ inl vec vec_new (u16 capacity) {
 	};
 }
 
-# endif // PUL_VEC_H
+# endif // LIBPOCHA_VEC_H
 

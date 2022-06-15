@@ -1,13 +1,13 @@
 
-# ifndef PUL_COR_H
-# define PUL_COR_H
+# ifndef LIBPOCHA_COR_H
+# define LIBPOCHA_COR_H
 # include <stdint.h>
 
 // version
 
-# define PUL_VERSION_MAYOR 0
-# define PUL_VERSION_MINOR 5
-# define PUL_VERSION_PATCH 0
+# define LIBPOCHA_VERSION_MAYOR 0
+# define LIBPOCHA_VERSION_MINOR 5
+# define LIBPOCHA_VERSION_PATCH 0
 
 // values
 
@@ -51,5 +51,5 @@ typedef nil (* prc) (ptr);
 // use: ARR_LEN ((str []) {"hola", "que", "tal?"}) => 3
 # define ARR_LEN(...) (sizeof __VA_ARGS__ / sizeof *__VA_ARGS__)
 
-# endif // PUL_COR_H
+# endif // LIBPOCHA_COR_H
 

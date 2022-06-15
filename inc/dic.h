@@ -1,6 +1,6 @@
 
-# ifndef PUL_DIC_H
-# define PUL_DIC_H
+# ifndef LIBPOCHA_DIC_H
+# define LIBPOCHA_DIC_H
 
 # include "vec.h"
 # include "str.h"
@@ -28,5 +28,5 @@ inl u08 dic_inc (vec * dictionary, u64 key) {
 	ret dic_idx (dictionary, key) != dictionary -> size;
 }
 
-# endif // PUL_DIC_H
+# endif // LIBPOCHA_DIC_H
 

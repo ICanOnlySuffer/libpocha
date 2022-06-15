@@ -1,6 +1,6 @@
 
-# ifndef PUL_NUM_H
-# define PUL_NUM_H
+# ifndef LIBPOCHA_U64_H
+# define LIBPOCHA_U64_H
 
 # include "cor.h"
 
@@ -13,5 +13,5 @@ inl u64 u64_max (u64 number_1, u64 number_2) {
 	ret number_1 > number_2 ? number_1 : number_2;
 }
 
-# endif // PUL_NUM_H
+# endif // LIBPOCHA_U64_H
 

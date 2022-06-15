@@ -1,6 +1,6 @@
 
-# ifndef PUL_STR_H
-# define PUL_STR_H
+# ifndef LIBPOCHA_STR_H
+# define LIBPOCHA_STR_H
 
 # include "cor.h"
 
@@ -54,5 +54,5 @@ ext str str_frm_fmt (str destine, str format, u64 values []);
 # define STR_FRM_FMT(destine_, format_, ...) \
 	str_frm_fmt (destine_, format_, (u64 []) {__VA_ARGS__})
 
-# endif // PUL_STR_H
+# endif // LIBPOCHA_STR_H
 

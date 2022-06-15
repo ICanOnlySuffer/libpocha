@@ -1,6 +1,6 @@
 
-# ifndef PUL_PUT_H
-# define PUL_PUT_H
+# ifndef LIBPOCHA_PUT_H
+# define LIBPOCHA_PUT_H
 
 # include "str.h"
 
@@ -43,5 +43,5 @@ inl nil new_lne_err () {
 # define PUT_ERR(...) \
 	FIL_PUT (STD_ERR, __VA_ARGS__)
 
-# endif // PUL_PUT_H
+# endif // LIBPOCHA_PUT_H
 
