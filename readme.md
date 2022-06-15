@@ -1,4 +1,4 @@
-# Pocha's Utility Library
+# LibPocha
 
 C and FASM static utility library for the average project. Contains
 low level implementations of vectors and dictionaries, as well as
@@ -7,6 +7,8 @@ procedures for output, strings, numbers and configuration files.
 Compiles for GNU+Linux and Mingw.
 
 ## Installation
+
+Available at the [AUR](https://aur.archlinux.org/packages/libpocha)
 
 **dependencies:**
 
@@ -20,14 +22,14 @@ Compiles for GNU+Linux and Mingw.
 
 **compilation:**
 
-	$ cc main.c -lpul
+	$ cc main.c -lpocha
 
 ### Examples
 
 **formatted output:**
 
 ```c
-# include <pul/put.h>
+# include <pocha/put.h>
 
 chr BUFFER [256];
 
@@ -48,8 +50,8 @@ u08 main () {
 **vectors:**
 
 ```c
-# include <pul/vec.h>
-# include <pul/put.h>
+# include <pocha/vec.h>
+# include <pocha/put.h>
 
 nil print_name (ptr name) {
 	PUT ("name: '", (str) name, "'\n");
@@ -70,5 +72,5 @@ u08 main () {
 
 ## Contributing
 
-Bug reports, suggestions and pull request are welcome!
+Bug reports, suggestions and pochal request are welcome!
 
