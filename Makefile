@@ -23,16 +23,15 @@ all: $(error platform `$(PLATFORM)` not supported)
 endif
 endif
 
-OBJ_DIR = obj-$(PLATFORM)
 SRC = $(shell find src -type f -name '*.c' ! -name ver.c) 
-OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
+OBJ = $(SRC:src/%.c=lib/%.o)
 
 INSTALL_INC_DIR = $(INSTALL_DIR)$(INC_DIR)
 INSTALL_LIB_DIR = $(INSTALL_DIR)$(LIB_DIR)
 
-C_FLAGS = -O3 -Wall -pedantic
+C_FLAGS = -O3 -Wall -Wextra -pedantic -g3
 
-all: inc/ver.h $(OBJ_DIR)/$(TARGET)
+all: inc/ver.h lib/$(TARGET)
 
 %/:
 	mkdir -p $@
@@ -41,27 +40,27 @@ inc/ver.h: src/ver.c
 	printf "`cat $<`" $(MAYOR) $(MINOR) $(PATCH) > $@
 
 ifeq ($(PLATFORM)-$(shell uname -m),gnu+linux-x86_64)
-$(OBJ_DIR)/%.o: src/%.asm
-	@mkdir -p $(OBJ_DIR)/
+lib/%.o: src/%.asm
+	@mkdir -p lib/
 	fasm $< $@
 endif
 
-$(OBJ_DIR)/%.o: src/%.c
+lib/%.o: src/%.c
 	$(CC) -c $< -o $@ $(C_FLAGS)
 
-$(OBJ_DIR)/$(TARGET): $(OBJ)
-	$(AR) rcs $@ $(OBJ_DIR)/*
+lib/$(TARGET): $(OBJ)
+	$(AR) rcs $@ lib/*
 
 install: uninstall all
 	@mkdir -p $(INSTALL_INC_DIR)/pocha/
 	@mkdir -p $(INSTALL_LIB_DIR)/
 	cp -r inc/* $(INSTALL_INC_DIR)/pocha/
-	cp -r $(OBJ_DIR)/$(TARGET) $(INSTALL_LIB_DIR)/$(TARGET)
+	cp -r lib/$(TARGET) $(INSTALL_LIB_DIR)/$(TARGET)
 
 uninstall:
 	rm -rf $(INSTALL_INC_DIR)/pocha/
 	rm -rf $(INSTALL_LIB_DIR)/$(TARGET)
 
 clean:
-	rm -rf inc/ver.h $(OBJ_DIR)/
+	rm -rf inc/ver.h lib/
 
