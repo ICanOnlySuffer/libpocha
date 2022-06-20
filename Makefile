@@ -46,6 +46,7 @@ lib/%.o: src/%.asm
 endif
 
 lib/%.o: src/%.c
+	@mkdir -p lib/
 	$(CC) -c $< -o $@ $(C_FLAGS)
 
 lib/$(TARGET): $(OBJ)
