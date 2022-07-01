@@ -3,15 +3,12 @@ format ELF64
 include "../inc/cor.inc"
 
 public str_end
-public str_len
-public str_chp
-public str_rvs
-public str_cmp
-public str_frm_u64
-public str_frm_hex
-public str_cpy
-public str_cpy_arr
-public str_frm_fmt
+public str_chomp
+public str_length
+public str_reverse
+public str_compare
+public str_from_num
+public str_from_hex
 
 section '.text' writable executable
 ; u64 ; u64:str ;
@@ -22,24 +19,45 @@ str_end:
 	inc l_0
 	cmp [l_0], byte 0
 	jne .loop
-.end:
 	ret
 
 ; u64 ; u64:str ;
-str_len:
-	cll str_end
-	sub l_0, l_1
-	ret
-
-; u64 ; u64:str ;
-str_chp:
+str_chomp:
 	cll str_end
 	mov [l_0-1], byte 0
 	mov l_0, l_1
 	ret
 
+; u64 ; u64:str ;
+str_length:
+	cll str_end
+	sub l_0, l_1
+	ret
+
+; u64 ; u64:str ;
+str_reverse:
+	psh l_1
+	psh l_3
+	cll str_end
+	dec l_0
+	cmp l_1, l_0
+	jnb .end
+.loop:
+	mov b_3, [l_0]
+	mov c_3, [l_1]
+	mov [l_0], c_3
+	mov [l_1], b_3
+	dec l_0
+	inc l_1
+	cmp l_1, l_0
+	jng .loop
+.end:
+	pop l_3
+	pop l_0
+	ret
+
 ; s16 ; u64:s_1 u64:s_2 ;
-str_cmp:
+str_compare:
 	mvz s_0, byte [l_1]
 	tst b_0, b_0
 	jeq .end
@@ -56,56 +74,8 @@ str_cmp:
 	sub s_0, s_3
 	ret
 
-; u64 ; u64:str ;
-str_rvs:
-	psh l_1
-	cll str_end
-	dec l_0
-	cmp l_1, l_0
-	jnb .end
-.loop:
-	mov b_3, [l_0]
-	mov c_3, [l_1]
-	mov [l_0], c_3
-	mov [l_1], b_3
-	dec l_0
-	inc l_1
-	cmp l_1, l_0
-	jng .loop
-.end:
-	pop l_0
-	ret
-
-; u64 ; u64:dst u64:str ;
-str_cpy:
-	mov b_0, [l_2]
-	mov [l_1], b_0
-	inc l_1
-	inc l_2
-	cmp b_0, byte 0
-	jne str_cpy
-.end:
-	mov [l_1], byte 0
-	mov l_0, l_1
-	ret
-
-; u64 ; u64:dst u08:len u64:arr ;
-str_cpy_arr:
-	mov b_4, b_2
-.loop:
-	mov l_2, [l_3]
-	cll str_cpy
-	dec l_1
-	add l_3, 8
-	dec b_4
-	cmp b_4, 0
-	jne .loop
-.end:
-	mov l_0, l_1
-	ret
-
 ; u64 ; str:dst u64:num ;
-str_frm_u64:
+str_from_num:
 	psh l_1
 	mov l_0, l_2
 .loop:
@@ -120,12 +90,12 @@ str_frm_u64:
 .end:
 	mov [l_1], byte 0
 	mov l_1, [rsp]
-	cll str_rvs
+	cll str_reverse
 	pop l_0
 	ret
 
 ; u64 ; str:dst u64:hex ;
-str_frm_hex:
+str_from_hex:
 	psh l_1
 	mov l_0, l_2
 .loop:
@@ -146,64 +116,8 @@ str_frm_hex:
 	mov [l_1+1], byte '0'
 	mov [l_1+2], byte 0
 	mov l_1, [rsp]
-	cll str_rvs
+	cll str_reverse
 	pop l_0
 	ret
 
-; u64 ; u64:dst u64:fmt u64:arr ;
-str_frm_fmt:
-	psh l_1
-	dec l_2
-.loop:
-	inc l_2
-	cmp [l_2], byte 0
-	jeq .end
-	cmp [l_2], byte '%'
-	jne .else
-	inc l_2
-	cmp [l_2], byte 'u'
-	jeq .whn_u
-	cmp [l_2], byte 'x'
-	jeq .whn_x
-	cmp [l_2], byte 's'
-	jeq .whn_s
-.else:
-	mov b_0, [l_2]
-	mov [l_1], b_0
-	inc l_1
-	jmp .loop
-.whn_u:
-	psh l_3
-	psh l_2
-	mov l_2, [l_3]
-	cll str_frm_u64
-	cll str_end
-	mov l_1, l_0
-	pop l_2
-	pop l_3
-	add l_3, 8
-	jmp .loop
-.whn_x:
-	psh l_3
-	psh l_2
-	mov l_2, [l_3]
-	cll str_frm_hex
-	cll str_end
-	mov l_1, l_0
-	pop l_2
-	pop l_3
-	add l_3, 8
-	jmp .loop
-.whn_s:
-	psh l_2
-	mov l_2, [l_3]
-	cll str_cpy
-	add l_3, 8
-	pop l_2
-	dec l_1
-	jmp .loop
-.end:
-	mov [l_1], byte 0
-	pop l_0
-	ret
 
