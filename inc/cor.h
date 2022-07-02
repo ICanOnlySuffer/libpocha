@@ -45,11 +45,19 @@ typedef nil (* prc) (ptr);
 // etc
 
 # define inl static inline
+# define prv static
 # define ext extern
 # define ret return
 
-// use: ARR_LEN ((str []) {"hola", "que", "tal?"}) => 3
+// ARR_LEN ((str []) {"hola", "que", "tal?"})
+// => 3
 # define ARR_LEN(...) (sizeof __VA_ARGS__ / sizeof *__VA_ARGS__)
+
+// ARR (str, "buen", "día", "!")
+// => 3, (str []) {"buen", "día", "!"}
+# define ARR(type_, ...) \
+	ARR_LEN ((type_ []) {__VA_ARGS__}), \
+	(type_ []) {__VA_ARGS__}
 
 # endif // LIBPOCHA_COR_H
 

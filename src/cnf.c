@@ -27,7 +27,7 @@ vec cnf_get (str path, u16 size) {
 			if (c == '\n') {
 				state = NEW_LINE;
 				buffer [i] = 0;
-				dic_psh (&dictionary, (u64) key, value);
+				dic_push (&dictionary, (u64) key, value);
 			} else {
 				buffer [i] = c;
 			}
