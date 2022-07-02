@@ -34,6 +34,26 @@ s16 str_compare (str string_1, str string_2) {
 	ret (s16) *string_1 - (s16) *string_2;
 }
 
+u08 str_equal (str string_1, str string_2) {
+	ret not str_compare (string_1, string_2);
+}
+
+str str_copy (str destine, u08 n_strings, str strings []) {
+	do {
+		--*strings;
+		do {
+			++*strings;
+			*destine = **strings;
+			++destine;
+		} while (**strings);
+		--destine;
+		++strings;
+	} while (--n_strings);
+	*destine = '\0';
+	
+	ret destine;
+}
+
 str str_from_num (str destine, u64 number) {
 	str start = destine;
 	do {
@@ -44,7 +64,7 @@ str str_from_num (str destine, u64 number) {
 	ret str_reverse (start);
 }
 
-str str_frm_hex (str destine, u64 number) {
+str str_from_hex (str destine, u64 number) {
 	str start = destine;
 	do {
 		u08 remainder = number % 16;

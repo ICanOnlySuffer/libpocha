@@ -16,9 +16,7 @@ ext str str_reverse (str string);
 // compares two strings
 ext s16 str_compare (str string_1, str string_2);
 // compares if two strings are equal
-inl u08 str_equal (str string_1, str string_2) {
-	ret not str_compare (string_1, string_2);
-}
+ext u08 str_equal (str string_1, str string_2);
 
 // string from u64
 ext str str_from_num (str destine, u64 number);
@@ -26,14 +24,16 @@ ext str str_from_num (str destine, u64 number);
 ext str str_from_hex (str destine, u64 number);
 
 // copies strings into another
-ext str str_copy (str destine, u08 n_strings, ...);
+ext str str_copy (str destine, u08 n_strings, str strings []);
+inl str str_concat (str destine, u08 n_strings, str strings []) {
+	ret str_copy (str_end (destine), n_strings, strings);
+}
 
-# define str_concat (destine_, n_strings_, strings_...) \
-	str_copy ( \
-		destine_ + str_length (destine_), \
-		n_strings_, \
-		strings_ \
-	)
+# define STR_COPY(destine_, ...) \
+	str_copy (destine_, ARR (str, __VA_ARGS__))
+
+# define STR_CONCAT(destine_, ...) \
+	str_concat (destine_, ARR (str, __VA_ARGS__))
 
 // formats a string
 ext str str_format (str destine, str format, ...);
