@@ -2,6 +2,7 @@
 # ifndef LIBPOCHA_STR_H
 # define LIBPOCHA_STR_H
 
+# include <stdarg.h>
 # include "cor.h"
 
 // returns end of the string
@@ -35,6 +36,8 @@ inl str str_concat (str destine, u08 n_strings, str strings []) {
 # define STR_CONCAT(destine_, ...) \
 	str_concat (destine_, ARR (str, __VA_ARGS__))
 
+// formats a string with a va_list
+ext str str_format_va (str destine, str format, va_list values);
 // formats a string
 ext str str_format (str destine, str format, ...);
 

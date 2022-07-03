@@ -1,10 +1,6 @@
 # include "../inc/str.h"
-# include <stdarg.h>
 
-str str_format (str destine, str format, ...) {
-	va_list values;
-	va_start (values, format);
-	
+str str_format_va (str destine, str format, va_list values) {
 	str start = destine;
 	do {
 		if (*format == '%') {
@@ -32,5 +28,15 @@ str str_format (str destine, str format, ...) {
 	*destine = 0;
 	
 	ret start;
+}
+
+str str_format (str destine, str format, ...) {
+	va_list values;
+	
+	va_start (values, format);
+	str_format_va (destine, format, values);
+	va_end (values);
+	
+	ret destine;
 }
 
