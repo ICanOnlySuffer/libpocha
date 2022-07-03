@@ -1,9 +1,10 @@
 
 MAYOR = 0
-MINOR = 7
+MINOR = 8
 PATCH = 0
 
 PLATFORM := gnu+linux
+ARCH := $(shell uname -m)
 
 ifeq ($(PLATFORM),gnu+linux)
 	PREFIX := $(if $(PREFIX),$(PREFIX),/usr)
@@ -39,7 +40,7 @@ all: inc/ver.h lib/$(TARGET)
 inc/ver.h: src/ver.c
 	printf "`cat $<`" $(MAYOR) $(MINOR) $(PATCH) > $@
 
-ifeq ($(PLATFORM)-$(shell uname -m),gnu+linux-x86_64)
+ifeq ($(PLATFORM)-$(ARCH),gnu+linux-x86_64)
 lib/%.o: src/%.asm
 	@mkdir -p lib/
 	fasm $< $@
