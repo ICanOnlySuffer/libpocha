@@ -12,6 +12,21 @@ u08 vec_push (vec * vector, ptr item) {
 	ret true;
 }
 
+// vector.push values...
+u08 vec_push_arr (vec * vector, u16 n_items, ptr items []) {
+	if (vector -> capacity < vector -> size + n_items) {
+		u16 new_size = num_max (n_items, vector -> size) * 2;
+		if (not vec_resize (vector, new_size)) {
+			ret false;
+		}
+	}
+	do {
+		vector -> items [vector -> size++] = *items++;
+	} while (vector -> size < n_items);
+	
+	ret true;
+}
+
 // vector.resize capacity
 u08 vec_resize (vec * vector, u16 capacity) {
 	ptr * items = realloc (vector -> items, sizeof (ptr) * capacity);
@@ -54,7 +69,7 @@ u08 vec_remove (vec * vector, ptr pointer) {
 }
 
 // vector.for_each &:proc
-nil vec_for_each (vec * vector, prc proc) {
+nil vec_for_all (vec * vector, prc proc) {
 	for (u16 i = 0; i < vector -> size; i++) {
 		proc (vector -> items [i]);
 	}

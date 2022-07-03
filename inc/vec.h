@@ -15,6 +15,12 @@ typedef struct {
 ext u08 vec_push (vec * vector, ptr item);
 
 // fails if can't allocate more memory
+ext u08 vec_push_arr (vec * vector, u16 n_items, ptr items []);
+
+# define VEC_PUSH(vector_, ...) \
+	vec_push_arr (vector_, ARR (ptr, __VA_ARGS__))
+
+// fails if can't allocate more memory
 ext u08 vec_resize (vec * vector, u16 capacity);
 
 // returns vector size if couldn't find it
@@ -27,7 +33,7 @@ ext nil vec_remove_at (vec * vector, u16 index);
 ext u08 vec_remove (vec * vector, ptr pointer);
 
 // for each
-ext nil vec_for_each (vec * vector, nil (* function) (ptr));
+ext nil vec_for_all (vec * vector, nil (* function) (ptr));
 
 // checks if vector includes a pointer
 inl u08 vec_includes (vec * vector, ptr pointer) {
