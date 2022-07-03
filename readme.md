@@ -29,40 +29,53 @@ Available at the [AUR](https://aur.archlinux.org/packages/libpocha)
 **formatted output:**
 
 ```c
-# include <pocha/put.h>
+# include <pocha/ioe.h>
 
-chr BUFFER [256];
+nil put_format (str format, ...) {
+	prv chr buffer [256];
+	va_list values;
+	
+	va_start (values, format);
+	str_format_va (buffer, format, values);
+	va_end (values);
+	
+	put (buffer);
+}
 
-# define put_fmt(format_, ...) \
-	put (STR_FRM_FMT (BUFFER, format_, __VA_ARGS__))
-
-u08 main () {
+s32 main () {
 	str string = "hola";
-	put_fmt (
-		"string: %s, length: %u, pointer: %x\n",
-		(u64) string, str_len (string), (u64) string
+	
+	put_format (
+		"string: '%s', length: %u, address: %x\n",
+		string, str_length (string), string
 	);
 }
+
 ```
 
-	string: 'hola', length: 4, pointer: 0x55a274c68006
+	string: 'hola', length: 4, pointer: 0x5622c96b8008
 
 **vectors:**
 
 ```c
 # include <pocha/vec.h>
-# include <pocha/put.h>
+# include <pocha/ioe.h>
 
-nil print_name (ptr name) {
-	PUT ("name: '", (str) name, "'\n");
+nil put_name (str name) {
+	PUT ("name: '", name, "'\n");
 }
 
-u08 main () {
+s32 compare_names (str * name_1, str * name_2) {
+	ret str_compare (*name_1, *name_2);
+}
+
+s32 main () {
 	vec names = vec_new (2);
-	VEC_PSH (&names, "Juan", "Pablo", "Alberto", "María");
-	vec_srt (&names, compare_name);
-	vec_for_all (&names, print_name);
+	VEC_PUSH (&names, "Juan", "Pablo", "Alberto", "María");
+	vec_sort (&names, (prc_cmp) str_compare);
+	vec_for_all (&names, (prc) put_name);
 }
+
 ```
 
 	name: 'Alberto'
