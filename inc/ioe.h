@@ -2,6 +2,7 @@
 # ifndef LIBPOCHA_PUT_H
 # define LIBPOCHA_PUT_H
 
+# include "arr.h"
 # include "str.h"
 
 # define STD_INN 0
@@ -10,19 +11,15 @@
 
 ext nil num_put_str (u64 fd, str string);
 ext nil num_put_chr (u64 fd, chr character);
+ext nil put (str string);
+ext nil put_chr (chr character);
+ext nil put_err (str string);
 
-inl nil put (str string) {
-	num_put_str (STD_OUT, string);
-}
-inl nil put_chr (chr character) {
-	num_put_chr (STD_OUT, character);
-}
-inl nil put_err (str string) {
-	num_put_str (STD_ERR, string);
-}
-inl nil put_lne () {
-	put_chr ('\n');
-}
+# define PUT(...) \
+	arr_for_all (ARR (ptr, __VA_ARGS__), (prc) put)
+
+# define PUT_ERR(...) \
+	arr_for_all (ARR (ptr, __VA_ARGS__), (prc) put_err)
 
 # endif // LIBPOCHA_PUT_H
 

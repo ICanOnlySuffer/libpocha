@@ -5,4 +5,7 @@ define STD_ERR 2
 
 extrn num_put_str
 extrn num_put_chr
+extrn put
+extrn put_chr
+extrn put_err
 
