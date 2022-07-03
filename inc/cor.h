@@ -41,6 +41,7 @@ typedef char chr;
 typedef char * str;
 
 typedef nil (* prc) (ptr);
+typedef s32 (* prc_cmp) (ptr, ptr);
 
 // etc
 
