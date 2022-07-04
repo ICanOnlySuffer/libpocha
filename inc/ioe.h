@@ -1,6 +1,6 @@
 
-# ifndef LIBPOCHA_PUT_H
-# define LIBPOCHA_PUT_H
+# ifndef LIBPOCHA_IOE_H
+# define LIBPOCHA_IOE_H
 
 # include "arr.h"
 # include "str.h"
@@ -21,5 +21,5 @@ ext nil put_err (str string);
 # define PUT_ERR(...) \
 	arr_for_all (ARR (ptr, __VA_ARGS__), (prc) put_err)
 
-# endif // LIBPOCHA_PUT_H
+# endif // LIBPOCHA_IOE_H
 
