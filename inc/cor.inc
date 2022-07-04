@@ -1,4 +1,7 @@
 
+if POCHA_COR_INC eqtype 1
+define POCHA_COR_INC "included"
+
 SYS_READ equ 0
 SYS_WRITE equ 1
 SYS_EXIT equ 60
@@ -14,8 +17,8 @@ define set sete
 define sys_cll syscall
 
 macro qut code {
-	mov l_0, SYS_EXIT
-	mov b_1, code
+	mov rax, SYS_EXIT
+	mov dil, code
 	syscall
 }
 
@@ -55,4 +58,6 @@ macro pop_all {
 ; parameter registers
 ; fun cll: rdi, rsi, rdx, rcx, r8, r9
 ; sys cll: rdi, rsi, rdx, r10, r8, r9
+
+end if
 
