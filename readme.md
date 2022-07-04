@@ -20,11 +20,13 @@ Available at the [AUR](https://aur.archlinux.org/packages/libpocha)
 
 ## Usage
 
-**compilation:**
+### C
+
+#### compilation
 
 	$ cc main.c -lpocha
 
-### Examples
+#### examples
 
 **formatted output:**
 
@@ -82,6 +84,38 @@ s32 main () {
 	name: 'Juan'
 	name: 'María'
 	name: 'Pablo'
+
+### FASM
+
+#### compilation:
+
+	$ fasm main.asm
+	$ ld main.o -e main -lpocha
+
+#### examples
+
+**reverse a string:**
+
+```asm
+format ELF64
+include "/usr/include/pocha/ioe.inc"
+
+section ".text" writable executabñe
+public main
+main:
+	mov rdi, hello
+	cll str_reverse
+	mov rdi, rax
+	cll put
+	mov rdi, 10
+	cll put_chr
+	qut 0
+
+section ".data" writable
+hello: db "hello world in reverse!", 0
+```
+
+	!esrever ni dlrow olleh
 
 ## Contributing
 
