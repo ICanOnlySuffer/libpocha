@@ -22,11 +22,11 @@ Available at the [AUR](https://aur.archlinux.org/packages/libpocha)
 
 ### C
 
-#### compilation
+#### compilation:
 
 	$ cc main.c -lpocha
 
-#### examples
+#### examples:
 
 **formatted output:**
 
@@ -89,10 +89,9 @@ s32 main () {
 
 #### compilation:
 
-	$ fasm main.asm
-	$ ld main.o -e main -lpocha
+	$ fasm main.asm && ld main.o -lpocha
 
-#### examples
+#### examples:
 
 **reverse a string:**
 
@@ -101,8 +100,8 @@ format ELF64
 include "/usr/include/pocha/ioe.inc"
 
 section ".text" writable executabñe
-public main
-main:
+public _start
+_start:
 	mov rdi, hello
 	cll str_reverse
 	mov rdi, rax
