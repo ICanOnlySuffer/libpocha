@@ -1,7 +1,19 @@
 
-MAYOR = 0
-MINOR = 8
-PATCH = 0
+define VERSION_H
+
+# define LIBPOCHA_VERSION_MAYOR 0
+# define LIBPOCHA_VERSION_MINOR 8
+# define LIBPOCHA_VERSION_PATCH 0
+
+/*
+	libpocha
+	Copyright (c) 2022 Piero Rojas
+	GNU General Public License v3.0
+*/
+
+endef
+
+export VERSION_H
 
 PLATFORM := gnu+linux
 ARCH := $(shell uname -m)
@@ -13,7 +25,7 @@ LIB_DIR = $(PREFIX)/lib
 TARGET  = libpocha.a
 else
 ifeq ($(PLATFORM),mingw)
-PREFIX := /usr/x86_64-w64-mingw32
+PREFIX := $(if $(PREFIX),$(PREFIX),/usr/x86_64-w64-mingw32)
 INC_DIR = $(PREFIX)/include
 LIB_DIR = $(PREFIX)/lib
 TARGET  = libpocha.dll
@@ -43,8 +55,8 @@ all: inc/ver.h lib/$(TARGET)
 %/:
 	mkdir -p $@
 
-inc/ver.h: src/ver.c
-	printf "`cat $<`" $(MAYOR) $(MINOR) $(PATCH) > $@
+inc/ver.h:
+	echo "$$VERSION_H" > $@
 
 ifeq ($(PLATFORM)-$(ARCH),gnu+linux-x86_64)
 lib/%.o: src/%.asm
